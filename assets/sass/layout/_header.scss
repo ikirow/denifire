@@ -1,0 +1,39 @@
+.site-header {
+  padding: 0;
+  background: $mobile-menu-bg;
+  position: fixed;
+  width: 100%;
+  z-index: 995;
+  top: 0;
+  padding: 10px;
+
+  .site-branding {
+    max-width: 190px;
+  }
+
+  @include bp( tablet ) {
+    padding: .5rem 0;
+    background: $header-bg;
+  } 
+
+  .row{
+    @include flex-wrap(nowrap)
+  }
+
+}
+
+.woocommerce {
+  .site-header{
+    background-image: url(http://denifire.test/wp-content/uploads/2021/01/Mask-Group-6-2@2x-scaled.jpg)
+  }
+
+  &.post-type-archive{
+    .site-header{
+      background-image: none;
+    }
+
+    .site-main{
+      margin-top: -49px;
+    }
+  }
+}

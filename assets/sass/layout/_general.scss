@@ -1,0 +1,180 @@
+html {
+  background-color: #fff;
+  font-size: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-famili-paragraph;
+  line-height: 1.4;
+  font-weight: 400;
+  background-color: $color__background-screen;
+}
+
+.site-content {
+  padding-top: 4rem;
+  margin-top: -59px;
+  @include bp(tablet) {
+    padding-top: 0;
+  }
+}
+
+
+.centered{
+  margin: 0 auto!important;
+  &.wp-block-button{
+    display: block;
+    width: fit-content;
+  }
+}
+
+.row {
+  &.center {
+    webkit-box-align: center;
+    -ms-flex-align: center;
+    -moz-align-items: center;
+    align-items: center;
+  }
+  //  Display Order
+  @mixin order($val) {
+    -webkit-box-ordinal-group: $val;
+    -moz-box-ordinal-group: $val;
+    -ms-flex-order: $val;
+    -webkit-order: $val;
+    order: $val;
+  }
+  .order-3 {
+    @include order(3);
+  }
+  .order-2 {
+    @include order(2);
+  }
+  .order-1 {
+    @include order(1);
+  }
+}
+
+
+//Simple Flex Columns
+
+$columns-gap: 0.9375rem;
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$columns-gap;
+  margin-right: -$columns-gap;
+  .column {
+    padding-left: $columns-gap;
+    padding-right: $columns-gap;
+    padding-bottom: $columns-gap;
+    flex: 1 1 100%;
+    @include bp(tablet){
+      padding-top: $columns-gap;
+    }
+  }
+
+  &.grid_2 {
+    @include bp(tablet){
+      .column{
+        flex: 0 0 50%;
+      }
+    }
+  }
+  &.grid_3 {
+    @include bp(tablet){
+      .column{
+        width: 33.333%;
+        flex: 0 0 33.33333%;
+      }
+    }
+  }
+  &.grid_4 {
+    @include bp(tablet){
+      .column{
+        width: 50%;
+        flex: 0 0 50%;
+      }
+    }
+    @include bp(tabletlandscape){
+      .column{
+        width: 25%;
+        flex: 0 0 25%;
+      }
+    }
+  }
+  &.grid_5 {
+    @include bp(tablet){
+      .column{
+        width: 20%;
+        flex: 0 0 20%;
+      }
+    }
+    @include bp(tabletlandscape){
+      .column{
+        width: 20%;
+        flex: 0 0 20%;
+      }
+    }
+  }
+}
+
+.wrapper, .container, .products {
+  max-width: 100%;
+  padding-left: em(20);
+  padding-right: em(20);
+  @include bp(phonexsdown){
+    padding-left: em(15);
+    padding-right: em(15);
+  }
+  @include bp(laptopxs){
+    max-width: $site_width;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+    &.narrow{
+      max-width: em(750);
+    }
+  }
+}
+
+.alignfull .wp-block-group__inner-container, .alignfull .wp-block-cover__inner-container{
+  @extend .container;
+}
+
+.bg-before-after-text {
+
+  background-color: $color__background-body;
+  padding: 64px 43px 50px 28px;
+  position: relative;
+
+  &:before, &:after{
+    content: '';
+    position: absolute;
+    height: 48px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &:before{
+    top:0;
+    left: 0;
+    background-image: url('../icons/text-before-image.svg');
+  }
+
+  &::after{
+    bottom:0;
+    left: 0;
+    background-image: url('../icons/text-after-image.svg');
+  }
+
+}

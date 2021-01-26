@@ -1,0 +1,6 @@
+//Include Shared variables/mixins/styles with the main Styles of the site
+@import "shared";
+
+.block-example{
+  background: $green;
+}

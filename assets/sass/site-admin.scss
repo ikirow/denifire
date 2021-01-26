@@ -1,0 +1,10 @@
+.editor-styles-wrapper {
+
+  @import "variables/variables-site";
+  @import "mixins/mixins-master";
+  @import "elements/elements";
+  @import "elements/lists";
+  @import "elements/tables";
+  @import "gutenberg/gutenberg";
+
+}

@@ -1,0 +1,136 @@
+// Maps.
+$color: (
+        grey-text: #646464,
+        dark-grey: #333333
+);
+
+$font-size: (
+        xs: 12px,
+        s: 16px,
+        m: 18px,
+        l: 28px,
+        xl: 36px
+);
+
+// Variables.
+$color-grey-text: #646464;
+$color-dark-grey: #333333;
+$font-size-xs: 12px;
+$font-size-s: 16px;
+$font-size-m: 18px;
+$font-size-l: 28px;
+$font-size-xl: 36px;
+
+/**
+ * Color palette.
+ *
+ * @see resources/styles/shared/_variables.scss
+ */
+@each $name, $value in $color {
+  .has-#{$name}-color {
+    color: $value;
+  }
+
+  .has-#{$name}-background-color {
+    background-color: $value;
+  }
+}
+
+/**
+ * Font sizes.
+ *
+ * @see resources/styles/shared/_variables.scss
+ */
+@each $name, $value in $font-size {
+  .has-#{$name}-font-size {
+    font-size: $value;
+  }
+}
+
+
+
+body .editor-styles-wrapper{
+  .wp-block {
+    //max-width: 90%;
+  }
+  .wp-block[data-align=full] {
+    max-width: none;
+  }
+
+  /*
+  color: $color__text-main;
+  font-family: $font-famili-paragraph;
+  */
+
+  /*
+  h1,h2,h3,h4,h5,h6 {
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    line-height: 1.4;
+    color: $darkgrey;
+    margin: 0;
+  }
+  h1{
+    font-size: 28px;
+  }
+
+  h2{
+    font-size: 20px;
+  }
+
+  h3{
+    font-size: 18px;
+  }
+
+  h4{
+    font-size: 16px;
+  }
+
+  h5,h6{
+    font-size: 16px;
+  }
+
+  a{
+    color: $blue;
+    text-decoration: none;
+  }
+
+  p{
+    font-size: em(14);
+    margin: 0;
+    @include bp(tablet){
+      font-size: 1em;
+    }
+  }
+  */
+}
+
+.wp-block-cover.alignfull{
+  padding: 0;
+  .wp-block-cover__inner-container{
+    width: 100%;
+  }
+}
+
+
+
+.is-style-red-button{
+	a{
+    appearance: none;
+    // border: 0;
+    // background-color: $color-red;
+    // width: 100%;
+    // padding: 21px 30px 25px;
+    // text-align: center;
+    // text-transform: uppercase; 
+    // color: $color-white;
+    // font-weight: bold;
+    // font-size: em(16);
+    // border-radius: 0;
+  }
+  
+  .wp-block-button__link{
+    background-color: $color-red;
+    padding: 0;
+  }
+}

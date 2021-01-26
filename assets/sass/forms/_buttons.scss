@@ -1,0 +1,57 @@
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	border: 1px solid;
+	border-color: $color__border-button;
+	border-radius: 3px;
+	background: $color__background-button;
+	color: rgba(0, 0, 0, .8);
+	@include font-size(0.75);
+	line-height: 1;
+	padding: .6em 1em .4em;
+
+	&:hover {
+		border-color: $color__border-button-hover;
+	}
+
+	&:active,
+	&:focus {
+		border-color: $color__border-button-focus;
+	}
+
+	
+}
+
+.red-button, .is-style-red-button{
+		appearance: none;
+		border: 0;
+		background-color: $color-red;
+		text-align: center;
+		text-transform: uppercase; 
+		color: $color-white!important;
+		font-weight: bold;
+		font-size: em(16);
+		border-radius: 0;
+		min-width: 240px;
+		min-height: 46px;
+		padding: 21px 30px 25px;
+
+		.wp-block-button__link{
+			background-color: $color-red;
+			padding: 0;
+		  }
+	
+}
+
+.red-button { 
+	a {
+		@extend .red-button;
+	}
+}
+
+input[type="submit"]{
+	&.red-button{
+		@extend .red-button;
+	}	
+}

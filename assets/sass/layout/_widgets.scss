@@ -1,0 +1,19 @@
+.widget {
+	margin: 0 0 1.5em;
+
+	/* Make sure select elements fit in widgets. */
+	select {
+		max-width: 100%;
+	}
+}
+
+.widget_product_categories{
+	padding: 22px 27px;
+	background-color: rgba(255,255,255, 0.5);
+}
+
+.widget-area {
+	@media screen and (max-width: 768px){
+    	margin: 0 auto;
+    }
+}

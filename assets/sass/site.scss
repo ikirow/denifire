@@ -1,0 +1,66 @@
+/*!
+Theme Name: Denifire
+Theme URI: http://webiz.team
+Author: Webiz Team
+Author URI: https://webiz.team/
+Description: Denifire Theme
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: denifire
+
+*/
+
+@import "variables/variables-site";
+@import "mixins/mixins-master";
+
+/*--------------------------------------------------------------
+# Normalize
+--------------------------------------------------------------*/
+@import "normalize";
+
+
+/*--------------------------------------------------------------
+# Main Layout
+--------------------------------------------------------------*/
+@import "flexboxgrid/flexgrid";
+
+@import "layout/general";
+@import "layout/sections";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/widgets";
+@import "layout/posts-and-pages";
+
+@import "typography/typography";
+
+@import "elements/elements";
+
+/*--------------------------------------------------------------
+# Gutenberg
+--------------------------------------------------------------*/
+// @import "blocks/block-statistics";
+
+@import "gutenberg/gutenberg";
+@import "forms/forms";
+@import "navigation/navigation";
+
+/*--------------------------------------------------------------
+# Accessibility
+--------------------------------------------------------------*/
+@import "modules/accessibility";
+
+/*--------------------------------------------------------------
+# Modules
+--------------------------------------------------------------*/
+@import "modules/alignments";
+@import "modules/clearings";
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+@import "media/media";
+@import "layout/visibility";
+
+
+
