@@ -1,0 +1,253 @@
+//  Fonts and icons
+//  -----------------------------
+
+// Mixin for adding custom fonts in the dir /fonts/fontfoldername/font-regular
+// example /fonts/averta/averta-bold.woff
+// example /fonts/averta/averta-regular.woff
+
+@mixin fontdef($path, $filename, $version, $type:"Regular") {
+  src: url("../fonts/#{$path}/#{$filename}-#{$type}.eot?#iefix&v=#{$version}") format("embedded-opentype"),
+  url("../fonts/#{$path}/#{$filename}-#{$type}.woff&v=#{$version}") format("woff"),
+  url("../fonts/#{$path}/#{$filename}-#{$type}.ttf&v=#{$version}") format("truetype");
+}
+
+// Below are examples
+// $AvertaFamily: 'Averta';
+// $AvertaVersion: '1.0';
+// $AvertaPath: "Averta";
+// $regularfont: 400;
+// $semiboldfont: 500;
+// $boldfont: 600;
+//
+//@font-face {
+//  font-family: $AvertaFamily;
+//  font-display: auto;
+//  @include fontdef($AvertaPath, $AvertaFamily, $AvertaVersion, "Regular");
+//  font-weight: $regularfont;
+//}
+//@font-face {
+//  font-family: $AvertaFamily;
+//  font-display: auto;
+//  @include fontdef($AvertaPath, $AvertaFamily, $AvertaVersion, "Semibold");
+//  font-weight: $semiboldfont;
+//}
+//@font-face {
+//  font-family: $AvertaFamily;
+//  font-display: auto;
+//  @include fontdef($AvertaPath, $AvertaFamily, $AvertaVersion, "Bold");
+//  font-weight: $boldfont;
+//}
+
+/* roboto-condensed-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-regular.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
+/* roboto-condensed-700 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-700.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-700.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
+/* roboto-condensed-300 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-300.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-300.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-300.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Robotocondensed/roboto-condensed-v19-latin_cyrillic-300.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
+
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-100.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-100.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-100.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-100.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-100.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-100.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+/* roboto-regular - latin_cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+/* roboto-700 - latin_cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-700.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Roboto/roboto-v20-latin_cyrillic-ext-700.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+
+
+
+
+
+$font-family-sans-serif: 'Roboto Condensed' ,Helvetica, Arial, sans-serif;
+$font-family-serif: 'Roboto', 'Times New Roman', serif;
+$font-famili-paragraph: 'Roboto', Helvetica;
+
+
+
+$font__main: $font-famili-paragraph;
+$font__code: Arial, "Helvetica Neue", Helvetica, sans-serif;
+$font__pre: "Courier 10 Pitch", Courier, monospace;
+$font__line-height-body: 1.5;
+$font__line-height-pre: 1.6;
+
+$base_font_size: 16px;
+$font_family: $font-famili-paragraph;
+$font_family_menu: $font-famili-paragraph;
+$font_family_headings: $font-family-sans-serif;
+
+
+$easing: ease-out;
+
+
+// PX to EM/REM - https://gist.github.com/isellsoap/8299726
+
+$base-font-size: $base_font_size;
+
+/**
+ * Strips the unit from a given number-unit-combination and returns the number.
+ * @link: http://stackoverflow.com/a/12335841/1779999
+ * @usage: parse-int(10px) => 10
+ */
+
+@function parse-int($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+/**
+ * Simply adds the em unit to a given number. This is used twice in the
+ * function underneath, thus the need for a separate function.
+ */
+
+@function add-em-unit($number) {
+  @return $number * 1em;
+}
+
+@function add-rem-unit($number) {
+  @return $number * 1rem;
+}
+
+/**
+ * Calculates em values for a given list of (px or em) values and a given em
+ * base. Multiply base values for nested em structures (last @usage example).
+ * @usage: em(10px, 1.125) => .55556em
+ *         em(24px, .875em) => 1.71429em
+ *         em(12px 0 7em rgba(0, 0, 0, .7), 1.75) => .42857em 0 4em rgba(0, 0, 0, 0.7)
+ *         em(12px) + em(3em) => 3.75em
+ *         em(23px, em(53px)) => .43396em
+ *         em(24px, 1.5 * 1.125) => .88889em
+ */
+
+@function em($values, $em-base: 1) {
+  $base-font-size: parse-int($base-font-size);
+  $em-base: parse-int($em-base);
+  $result: ();
+
+  @each $value in $values {
+    @if $value == 0 or type-of($value) != "number" {
+      $result: append($result, $value);
+    } @else {
+      $unit: unit($value);
+      $value: parse-int($value);
+
+      @if $unit == "px" {
+        $result: append($result, add-em-unit($value / ($base-font-size * $em-base)));
+      } @else if $unit == "em" {
+        $result: append($result, add-em-unit($value / $em-base));
+      } @else if $unit == "" {
+        $result: append($result, add-em-unit($value / ($base-font-size * $em-base)));
+      }
+    }
+  }
+
+  /**
+   * If only one value is provided, output the instance of that object instead
+   * of the whole list. This enables use cases like nested function invocations
+   * (e.g. `em(2px, em(15px))`) or additions/subtractions (e.g. `em(5px) + em(32px)`).
+   */
+  @if length($result) == 1 {
+    @return nth($result, 1);
+  } @else {
+    @return $result;
+  }
+}
+
+
+@function rem($values, $em-base: 1) {
+  $base-font-size: parse-int($base-font-size);
+  $em-base: parse-int($em-base);
+  $result: ();
+
+  @each $value in $values {
+    @if $value == 0 or type-of($value) != "number" {
+      $result: append($result, $value);
+    } @else {
+      $unit: unit($value);
+      $value: parse-int($value);
+
+      @if $unit == "px" {
+        $result: append($result, add-rem-unit($value / ($base-font-size * $em-base)));
+      } @else if $unit == "em" {
+        $result: append($result, add-rem-unit($value / $em-base));
+      } @else if $unit == "" {
+        $result: append($result, add-rem-unit($value / ($base-font-size * $em-base)));
+      }
+    }
+  }
+
+  /**
+   * If only one value is provided, output the instance of that object instead
+   * of the whole list. This enables use cases like nested function invocations
+   * (e.g. `em(2px, em(15px))`) or additions/subtractions (e.g. `em(5px) + em(32px)`).
+   */
+  @if length($result) == 1 {
+    @return nth($result, 1);
+  } @else {
+    @return $result;
+  }
+}
+
+

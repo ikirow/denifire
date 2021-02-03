@@ -1,0 +1,13 @@
+
+// Visibility classes
+.show-xs {
+  @include bp(tablet) {
+    display: none;
+  }
+}
+
+.hide-xs {
+  @include bp(tabletdown) {
+    display: none;
+  }
+}

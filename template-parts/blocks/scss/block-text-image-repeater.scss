@@ -1,0 +1,37 @@
+@import "shared";
+
+.image-text-repeater {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 46px 49px;
+
+    @media screen and (max-width: 979px){
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    @include bp (tabletdown) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp (phonexldown){
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    div{
+        text-align: center;
+    }
+
+    img{
+        @include bp (phonexldown){
+            max-width: 80%;
+            margin: 0 auto;
+        }
+    }
+
+    label{
+        @include bp (phonexldown){
+            width: 100%;
+            display: block;
+        }
+    }
+}

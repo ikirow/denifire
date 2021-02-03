@@ -1,0 +1,72 @@
+
+// WooCommerce color variables
+$woocommerce__color-error: #e2401c;
+$woocommerce__color-success: #0f834d;
+$woocommerce__color-info: #3d9cd2;
+
+// Import variables and mixins
+@import "variables/variables-site";
+@import "mixins/mixins-master";
+
+/**
+ * Imports
+ */
+@import "woocommerce/animation";
+@import "woocommerce/fonts";
+@import "woocommerce/mixins";
+@import "woocommerce/variables";
+
+/**
+ * Basic Layout
+ */
+@import "woocommerce/layout";
+
+/**
+ * Shop tables
+ */
+@import "woocommerce/tables";
+
+/**
+ * Products
+ */
+@import "woocommerce/products";
+
+/**
+ * Single product
+ */
+@import "woocommerce/single-product";
+
+/**
+ * Checkout
+ */
+@import "woocommerce/checkout";
+
+/**
+ * Cart
+ */
+@import "woocommerce/cart";
+
+/**
+ * General WooCommerce components
+ */
+@import "woocommerce/components";
+
+/**
+ * WooCommerce widgets
+ */
+@import "woocommerce/widgets";
+
+/**
+ * WooCommerce Account pages
+ */
+@import "woocommerce/account";
+
+/**
+ * WooCommerce Product List
+ */
+@import "woocommerce/product_list";
+
+/**
+ * WooCommerce SmallScreen
+ */
+@import "woocommerce/woocommerce_smallscreen";

@@ -1,0 +1,107 @@
+
+// Default - 321 - 400
+
+@mixin bp($point) {
+
+  @if $point == phonexxs{
+    @media (max-width: 320px) {
+      @content;
+    }
+  }
+  @if $point == phonexsdown{
+    @media (max-width: 360px) {
+      @content;
+    }
+  }
+
+  @if $point == phonexl{
+    @media (min-width: 400px) {
+      @content;
+    }
+  }
+
+  @if $point == phonexldown{
+    @media (max-width: 415px) {
+      @content;
+    }
+  }
+
+  @if $point == phoneportrait {
+    @media (min-width: 568px){
+      @content;
+    }
+  }
+
+  @if $point == phoneportraitOnly {
+    @media (min-width: 568px) and (max-width: 670px){
+      @content;
+    }
+  }
+
+  @if $point == phoneportraitxlOnly {
+    @media (min-width: 720px) and (max-width: 767px){
+      @content;
+    }
+  }
+
+  @else if $point == tabletdown {
+    @media (max-width: 767px){
+      @content;
+    }
+  }
+
+  @else if $point == tablet {
+    @media (min-width: 768px){
+      @content;
+    }
+  }
+
+  @else if $point == tabletlandscape{
+    @media (min-width: 992px){
+      @content;
+    }
+  }
+
+  @else if $point == laptopxs {
+    @media (min-width: 1280px){
+      @content;
+    }
+  }
+
+  @else if $point == laptopxsdown {
+    @media (max-width: 1279px){
+      @content;
+    }
+  }
+
+  @else if $point == laptop {
+    @media (min-width: 1366px){
+      @content;
+    }
+  }
+
+  @else if $point == laptopxl {
+    @media (min-width: 1440px){
+      @content;
+    }
+  }
+
+  @else if $point == desktopxs {
+    @media (min-width: 1600px){
+      @content;
+    }
+  }
+
+  @else if $point == desktop {
+    @media (min-width: 1920px){
+      @content;
+    }
+  }
+
+  @else if $point == desktopxl {
+    @media (min-width: 2500px){
+      @content;
+    }
+  }
+
+}

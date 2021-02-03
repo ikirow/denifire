@@ -1,0 +1,18 @@
+
+
+
+.product-category {
+	a {
+		color: #000;
+		display: flex;
+		flex-direction: row-reverse;
+		align-items: center;
+		z-index: 9;
+	}
+
+	img{
+		max-width: 80px;
+        margin-bottom: 0!important;
+        min-height: 80px;
+	}
+}

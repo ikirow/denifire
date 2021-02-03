@@ -1,0 +1,37 @@
+{
+  "name": "webiz-starter-theme",
+  "version": "1.0.0",
+  "description": "Denifire Theme build",
+  "main": "gulpfile.js",
+  "scripts": {
+    "setup": "npm install",
+    "dev": "gulp",
+    "styles": "gulp sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/Neshable/webiz-starter-theme.git"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "IE 10"
+  ],
+  "author": "Nesho and Alek",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Neshable/webiz-starter-theme#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-load-plugins": "^2.0.3",
+    "gulp-notify": "^3.2.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^4.14.1"
+  },
+  "dependencies": {}
+}

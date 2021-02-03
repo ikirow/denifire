@@ -1,0 +1,203 @@
+@import "shared"; 
+
+.block-image-link-repeater {
+    display: flex;
+    padding: 80px 46px;
+    box-shadow: 0px 0px 14px rgba(0,0,0,0.14);
+    overflow: hidden;
+    position: relative;
+    margin-top: -150px;
+    z-index: 99;
+    background-color: #fff;
+    margin-bottom: 50px;
+
+    @include bp (laptopxsdown){
+        flex-wrap: wrap;
+        padding: 40px 23px;
+        
+        margin-top: -50px;
+    }
+     
+
+    @media screen and (max-width: 540px){
+        flex-direction: column;
+        padding: 0 46px;
+    }
+
+    &.products{
+        background-color: transparent;
+        margin-top: initial;
+        flex-wrap: wrap;
+        box-shadow: none;
+        justify-content: space-between;
+
+        @media screen and (max-width: 480px){
+            padding: 0;
+        }
+    }
+}
+
+.products{
+    .repeater__content {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        width: 23%;
+        padding: 0;
+        position: relative;
+        padding:  0 15px;
+        margin-bottom: 90px;
+
+        @media screen and (max-width: 979px){
+            width: 48%;
+        }
+
+        @media screen and (max-width: 480px){
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        &:after{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 80px;
+            background-color: #fff;
+            z-index: 1;
+            margin-top: -40px;
+            transition: all 0.15s ease-in-out;
+            border-left: 6px solid $color-white;
+            border-right: none;
+
+            @media screen and (max-width: 540px){
+                transform: none;
+            }
+        }        
+
+        &:hover{
+            &::after{
+                height: 162px;
+                margin-top: -81px;
+                border-color: $color-red; 
+
+                @media screen and (max-width: 480px){
+                    height: 80px;
+                    margin-top: -40px;
+                }
+            }
+        }
+
+        &:last-of-type{
+            &::after{
+                display: block;
+            }
+        }
+
+        a{
+            font-size: 13px;
+            z-index: 2;
+            text-align: left;
+        }
+
+        img{
+            z-index: 2;
+            margin: 0;
+            max-height: 120px;
+            width: auto;
+        }
+    }
+}
+
+.repeater__content{
+    display: flex;
+    flex-direction: column;
+    padding: 0 56px;
+    align-items: center;
+    position: relative; 
+
+    @include bp (laptopxsdown){
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 540px){
+        padding: 26px 0;
+        width: 100%;
+    }
+
+    &:after{
+        content: '';
+        height: 60px;
+        border-right: 2px solid #F1F1F1;
+        position: absolute;
+        top: 50%;
+        margin-top: -30px;
+        right: 0;
+
+        @media screen and (max-width: 540px){
+            right: 50%;
+            margin-top: initial;
+            transform: rotate(90deg);
+            top: initial;
+            bottom: -30px;
+        }
+    }
+
+    &:last-of-type{
+        &::after{
+            display: none;
+        }
+    }
+
+    img{
+        max-width: 80px;
+        margin-bottom: 32px;
+        min-height: 80px;
+        object-fit: contain;
+    }
+
+    a{
+        text-transform: uppercase;
+        color: #000;
+        text-align: center;
+        font-weight: bold;
+
+        &:hover{
+            text-decoration: none;
+        }
+
+        &:visited{
+            color: #000;
+            
+        }
+    }
+}
+
+.fire-bg {
+	background-image: url(http://denifire.test/wp-content/uploads/2021/01/Group-37.svg);
+	background-repeat: no-repeat; 
+    background-size: contain; 
+    background-position: center;
+    position: relative;
+    overflow: visible;
+
+    &.--right{
+        background-image: none;
+        padding: 200px 0;
+
+        &::after{
+            content: '';
+            background-image: url(http://denifire.test/wp-content/uploads/2021/01/Group-37.svg);
+            background-repeat: no-repeat; 
+            background-size: 40%; 
+            background-position: center;
+            position: absolute;
+            right: -75%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+}

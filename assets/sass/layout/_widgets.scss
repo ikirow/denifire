@@ -1,0 +1,60 @@
+.widget {
+	margin: 0 0 1.5em;
+
+	/* Make sure select elements fit in widgets. */
+	select {
+		max-width: 100%;
+	}
+}
+
+.widget_product_categories{
+	padding: rem(22px) rem(20px);
+	background-color: rgba(255,255,255, 0.5);
+
+	@include bp(laptopxs) {
+		min-width: rem(330);
+		margin-right: 30px;
+	}
+
+	a{
+		font-size: rem(14);
+		text-transform: uppercase;
+	}
+
+	.product-categories {
+		> .cat-parent{
+			position: relative;
+			&:after{
+				content: '+';
+				position: absolute;
+				right: 10px;
+				top: 2px;
+			}
+
+			&.active{
+				&:after{
+					content: '-';
+				}
+			}
+		}
+	}
+
+	.children {
+		max-height: 0;
+		overflow: hidden;
+		transition: all 0.25s ease-out;
+
+		&.active{
+			max-height: 300px;
+		}
+		a{ 
+			text-transform: capitalize;
+		}
+	}
+}
+
+.widget-area {
+	@media screen and (max-width: 768px){
+    	margin: 0 auto;
+    }
+}

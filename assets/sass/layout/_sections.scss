@@ -1,0 +1,85 @@
+.sectionWithInquieryBtn {
+    margin-top: rem(50);
+    margin-bottom: 50px;
+
+
+    @include bp(laptopxs) {
+    }
+
+    h2 {
+        margin-bottom: 20px;
+
+        @include bp(tablet) {
+            min-height: 70px;
+        }
+    }
+
+    p{
+        max-width: 444px;
+        margin: 0 auto;
+    }
+}
+
+.oneLineGallery {
+    ul {
+        
+        justify-content: space-between;
+        width: 100%;
+        @include bp(tablet) {
+            flex-wrap: nowrap;
+        }
+    }
+
+    &.wp-block-gallery{
+        &.is-cropped{
+            .blocks-gallery-item{                
+                max-width: 25%;
+                padding: 20px;
+                @include bp(tablet) {
+                    max-width: 50px;
+                    padding: 0;
+                }
+
+                &:nth-of-type(n+2):nth-of-type(-n+5) {
+                    max-width: 30%;
+                    @include bp(tablet) {                        
+                        max-width: rem(120)
+                    }
+                }
+                img{
+                    object-fit: contain;
+                    object-position: center ;
+
+                    @include bp(tablet) {                        
+                        object-position: center top;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Hero section with heading
+.is-style-hero-only-heading {
+    &.wp-block-cover {
+        max-height: 200px;
+        min-height: 200px;
+        @include bp(tablet) {
+            max-height: 243px;
+            min-height: 243px;
+        }
+
+        p, h1{
+            margin-top: 60px;
+            font-family: $font-family-sans-serif;
+            font-weight: bold;
+            font-size: rem(42);
+            text-transform: uppercase;
+
+            @include bp(tablet) {
+                margin-top: 90px;
+            }
+
+        }
+    }
+}

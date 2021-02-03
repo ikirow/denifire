@@ -1,0 +1,43 @@
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	@include center-block;
+}
+
+
+.alignfull {
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	max-width: 100vw;
+	width: 100vw;
+}
+
+.alignwide {
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	max-width: 100vw;
+	width: 100vw;
+	
+	@include bp(laptopxs){
+		margin-left: calc(50% - 600px);
+		margin-right: calc(50% - 600px);
+		max-width: $site_width;
+		width: $site_width;
+	}
+
+	@include bp(phonexsdown){
+		padding-left: em(15);
+		padding-right: em(15);
+	}
+}

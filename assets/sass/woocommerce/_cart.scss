@@ -1,0 +1,199 @@
+
+/**
+ * Cart page
+ */
+
+.woocommerce,
+.woocommerce-page {
+
+  table.cart,
+  #content table.cart {
+
+    img {
+      height: auto;
+    }
+
+    td.actions {
+      text-align: right;
+
+      .input-text {
+        width: 80px;
+      }
+
+      .coupon {
+        float: left;
+
+        label {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .cart-collaterals {
+
+    @include clearfix();
+    width: 100%;
+
+    .related {
+      width: 30.75%;
+      float: left;
+    }
+
+    .cross-sells {
+      width: 48%;
+      float: left;
+
+      ul.products {
+        float: none;
+
+        li {
+          width: 48%;
+        }
+      }
+    }
+
+    .shipping_calculator {
+      width: 48%;
+
+      @include clearfix();
+      clear: right;
+      float: right;
+
+      .col2-set {
+
+        .col-1,
+        .col-2 {
+          width: 47%;
+        }
+      }
+    }
+
+    .cart_totals {
+      float: right;
+      width: 48%;
+    }
+  }
+
+  /**
+   * Forms
+   */
+  form {
+
+    .form-row {
+
+      @include clearfix();
+
+      label {
+        display: block;
+
+        &.checkbox {
+          display: inline;
+        }
+      }
+
+      select {
+        width: 100%;
+      }
+
+      .input-text {
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
+
+    .form-row-first,
+    .form-row-last {
+      width: 47%;
+      overflow: visible;
+    }
+
+    .form-row-first {
+      float: left;
+
+      /*rtl:raw:
+      float: right;
+      */
+    }
+
+    .form-row-last {
+      float: right;
+    }
+
+    .form-row-wide {
+      clear: both;
+    }
+
+    .password-input {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+
+      input[type="password"] {
+        padding-right: 2.5rem;
+      }
+
+      /* Hide the Edge "reveal password" native button */
+      input::-ms-reveal {
+        display: none;
+      }
+    }
+
+    .show-password-input {
+      position: absolute;
+      right: 0.7em;
+      top: 0.7em;
+      cursor: pointer;
+    }
+
+    .show-password-input::after {
+
+      @include iconafter( "\e010" ); 	// Icon styles and glyph
+    }
+
+    .show-password-input.display-password::after {
+      color: #585858;
+    }
+  }
+
+  #payment {
+
+    .form-row {
+
+      select {
+        width: auto;
+      }
+    }
+
+    .wc-terms-and-conditions,
+    .terms {
+      text-align: left;
+      padding: 0 1em 0 0;
+      float: left;
+    }
+
+    #place_order {
+      float: right;
+    }
+  }
+
+  .woocommerce-billing-fields,
+  .woocommerce-shipping-fields {
+
+    @include clearfix();
+  }
+
+  .woocommerce-terms-and-conditions {
+    margin-bottom: 1.618em;
+    padding: 1.618em;
+  }
+
+  /**
+   * oEmbeds
+   */
+  .woocommerce-oembed {
+    position: relative;
+  }
+
+}
