@@ -191,7 +191,7 @@
 
 
 .blog {
-	padding-top: 150px;
+	//padding-top: 150px;
 
 	@include bp(tabletdown) {
 		padding-top: 75px;
@@ -252,8 +252,11 @@
 
 .post-template-default {
 	&.single {
-		padding-top: 150px;
-
+		//padding-top: 150px;
+		.entry-content{
+			max-width: 800px;
+			margin: 0 auto;
+		}
 		@include bp(tabletdown) {
 			padding-top: 50px;
 		}

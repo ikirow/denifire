@@ -85,4 +85,56 @@
         </div>
     </header><!-- #masthead -->
 
+    <style>
+        <?php
+        $hero_override = get_field( 'hero_background_override' );
+        if($hero_override){?>
+            .hero_section{
+                background-image: url(<?php echo $hero_override; ?>)!important;
+            }
+        <?php } ?>
+        <?php
+        $mobile_hero_override = get_field( 'mobile_background_override' );
+        if($mobile_hero_override){?>
+            @media(max-width: 480px) {
+                .hero_section {
+                    background-image: url(<?php echo $mobile_hero_override; ?>)!important;
+                }
+            }
+        <?php } ?>
+    </style>
+    <?php
+
+    $show_hero = false;
+    if(is_archive() || is_singular('product')|| is_home()){
+        $show_hero = true;
+    }elseif ((is_page() || is_single()) && !(get_field( 'show_hero' ) === false)){
+        $show_hero = true;
+    }
+
+    $show_title = false;
+    if((is_page() || is_single()) && !(get_field( 'show_hero' ) === false)){
+        $show_title = true;
+    }else if(is_archive() || is_home()){
+        $show_title = true;
+    }
+
+    $title = get_the_title();
+    if(is_archive() || is_home()){
+        $title = get_the_archive_title();
+    }
+
+    ?>
+
+    <?php if(!is_front_page()){
+        if($show_hero){
+        ?>
+        <div class="hero_section <?php if($show_title){ echo 'with-title';}?>">
+            <?php if($show_title){ ?>
+                <h1><?php echo $title;?></h1>
+            <?php } ?>
+        </div>
+        <?php } ?>
+    <?php } ?>
+
     <div id="content" class="site-content">

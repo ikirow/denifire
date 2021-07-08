@@ -21,10 +21,10 @@ body {
 }
 
 .site-content {
-  padding-top: 4rem;
+  padding-top: 3rem;
   // margin-top: -59px;
   @include bp(tablet) {
-    padding-top: 0;
+    padding-top: 3rem;
   }
 }
 
@@ -150,3 +150,6 @@ $columns-gap: 0.9375rem;
   @extend .container;
 }
 
+.wpcf7 .ajax-loader{
+  position: absolute;
+}

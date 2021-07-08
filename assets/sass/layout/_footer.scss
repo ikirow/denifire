@@ -1,8 +1,12 @@
 .site-footer {
+  margin-top: 2rem;
   padding: rem(49) 0;
   background: $darkblue;
   color: white;
-  background-image: url('http://denifire.test/wp-content/uploads/2021/01/shutterstock_1572203692.jpg');
+  background-image: url('../img/footer_bg_mobile.jpg');
+  @include bp(tablet){
+    background-image: url('../img/footer_bg.jpg');
+  }
   position: relative;
   background-size: cover;
   background-position: bottom;
