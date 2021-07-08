@@ -22,6 +22,9 @@ body {
 
 .site-content {
   padding-top: 3rem;
+  &.no-hero{
+    padding-top: 0!important;
+  }
   // margin-top: -59px;
   @include bp(tablet) {
     padding-top: 3rem;

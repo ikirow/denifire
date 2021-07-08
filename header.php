@@ -137,4 +137,4 @@
         <?php } ?>
     <?php } ?>
 
-    <div id="content" class="site-content">
+    <div id="content" class="site-content <?php if((get_field( 'show_hero' ) === false) || is_front_page()){echo 'no-hero';}?>">
