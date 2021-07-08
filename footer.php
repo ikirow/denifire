@@ -58,6 +58,7 @@
                 printf( esc_html__( 'Denifire Ltd. © 2005 - %1$s %2$s ', 'denifire' ), date("Y"), 'ПОЖАРОГАСИТЕЛИ, ПРОТИВОПОЖАРНА ТЕХНИКА - ДЕНИ ФАЙЕР ООД.' );
                 
                 ?>
+                 <a href="https://webiz.team" target="_blank" style="color: #fff;">Webiz - Web Design and Development</a>
             </div><!-- .site-info -->
         </div>
     </div>
