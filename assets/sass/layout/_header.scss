@@ -4,10 +4,11 @@
   width: 100%;
   z-index: 995;
   top: 0;
-  padding: 1.125rem 10px;
+  padding: 7px 10px;
 
   @include bp(laptopxs){
-    padding: 28px 10px;
+    padding: 17px 10px;
+    max-height: 80px;
   }
 
   @include bp(laptopxsdown){
@@ -54,7 +55,7 @@
     }
     #site-navigation{
       position: absolute;
-      top: -4px;
+      top: 6px;
       left: 18px;
     }
 
