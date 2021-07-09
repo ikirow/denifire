@@ -561,6 +561,9 @@ div.product div.images img{
 	margin: 0 auto;
 }
 
-.woocommerce-product-gallery__wrapper{
+.woocommerce-product-gallery__wrapper, .woocommerce-product-gallery{
 	background: #fff;
+}
+.flex-control-nav{
+	margin-top: 10px;
 }
