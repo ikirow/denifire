@@ -306,7 +306,6 @@
       flex-direction: row-reverse;
       justify-content: space-between;
       width: auto;
-      padding: 0;
       position: relative;
       padding: 0 15px;
       margin-bottom: 20px;
@@ -323,7 +322,7 @@
       }
 
       @media screen and (max-width: 540px){
-          padding: 0 ;        
+          //padding: 0 ;
       }
 
       &:after {

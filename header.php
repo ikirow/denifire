@@ -113,7 +113,7 @@
     }
 
     $show_title = false;
-    if((is_page() || is_single()) && !(get_field( 'show_hero' ) === false)){
+    if((is_page() || is_singular('post')) && !(get_field( 'show_hero' ) === false)){
         $show_title = true;
     }else if(is_archive() || is_home()){
         $show_title = true;

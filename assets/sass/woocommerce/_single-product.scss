@@ -553,3 +553,14 @@ div.product {
 		display: none;
 	}
 }
+
+
+div.product div.images img{
+	max-height: 444px;
+	width: auto;
+	margin: 0 auto;
+}
+
+.woocommerce-product-gallery__wrapper{
+	background: #fff;
+}

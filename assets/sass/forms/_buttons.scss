@@ -13,6 +13,8 @@ input[type="submit"] {
 
 	&:hover {
 		border-color: $color__border-button-hover;
+		background-color: #FF0011;
+		text-decoration: none;
 	}
 
 	&:active,
@@ -23,10 +25,10 @@ input[type="submit"] {
 	
 }
 
-.red-button, .is-style-red-button{
+.red-button, .is-style-red-button .wp-block-button__link{
 		appearance: none;
 		border: 0;
-		background-color: $color-red;
+		background-color: $color-red!important;;
 		text-align: center;
 		text-transform: uppercase; 
 		color: $color-white!important;
@@ -35,12 +37,12 @@ input[type="submit"] {
 		border-radius: 0;
 		min-width: 240px;
 		min-height: 46px;
-		padding: 21px 30px 25px;
-
-		.wp-block-button__link{
-			background-color: $color-red;
-			padding: 0;
-		  }
+		padding: 21px 30px 21px;
+		transition: 0.2s ease-out;
+		&:hover {
+			background-color: #FF0011!important;
+			text-decoration: none;
+		}
 		
 		&.product__requestBtn {
 			width: 100%;
