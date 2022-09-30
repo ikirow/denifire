@@ -134,3 +134,7 @@ body .editor-styles-wrapper{
     padding: 0;
   }
 }
+
+.wp-block-gallery.has-nested-images figure.wp-block-image img{
+  max-width: rem(100)!important;
+}

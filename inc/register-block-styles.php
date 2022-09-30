@@ -38,3 +38,12 @@ register_block_style(
     )
     
 );
+
+register_block_style(
+    'core/group',
+    array(
+        'name'			=> 'section',
+        'label'			=> 'Section',
+        'style_handle'	=> 'section',
+    )
+);

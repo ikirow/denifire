@@ -68,11 +68,24 @@
 	}
 }
 
+.image-andtext-with-custom-bg-holder {
+
+	img {
+		// transform: scale(1.1);
+	}
+}
+
 .bg-before-after-text {
 	font-size: rem(14);
 	background-color: $color__background-body;
 	padding: 64px 43px 50px 28px;
 	position: relative;
+	
+
+	@include bp(laptopxs) {
+		min-width: 497px;
+		width: 497px; 
+	}
   
 	&:before, &:after{
 	  content: '';
@@ -124,6 +137,7 @@
 	}
 
 	.wp-block-media-text__content {
+		padding: 0 10.5%;
 
 		@include bp(phonexldown){
 			padding: 0 1.25em;
@@ -288,6 +302,14 @@
 	background-image: url(http://denifire.test/wp-content/uploads/2021/01/Group-37.svg);
 	background-repeat: no-repeat; 
 	background-size: contain; 
+
+	&.is-stacked-on-mobile{
+		@include bp(laptopxs) {
+			img{
+				min-height: rem(536);
+			}
+		}
+	}
 }
 
 .contact__locations {
@@ -348,5 +370,146 @@
 
 	textarea{
 		border-radius: 0!important;
+	}
+}
+
+.search-grid {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-gap: rem(30);
+
+	@include bp(tablet) {
+		grid-template-columns:  repeat(3, 1fr);
+	}
+
+	img{
+		max-height: rem(201);
+		object-fit: contain;
+	}
+
+	.product {
+		background-color: $color-white;
+	}
+
+	h2, p {
+		padding: rem(00) rem(10);
+	}
+
+	h2{
+		margin-bottom: 0;
+		font-size: rem(14);
+		text-align: center;
+		a{
+			text-align: center;
+		}
+	}
+}
+
+.home {
+	.woocommerce .products, .woocommerce-page .products {
+		@include bp(laptopxs) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+}
+
+.search-page {
+	@include bp(tablet) {
+		display: flex;
+	}
+}
+
+.image-heading {
+	margin-bottom: 0; 
+	color: #dddddd;
+	font-size: rem(50);
+		bottom: rem(-19);
+		position: relative;
+	@include bp(tablet) {
+		font-size: rem(60);
+		bottom: rem(-21);
+		position: relative;
+		
+	}
+
+	+ figure {
+		img {
+			z-index: 99;
+			position: relative;
+		}
+	}
+
+}
+
+.right-side {
+	h2{
+		padding-left: 40px;
+		@include bp(tablet) {
+			padding-left: 60px;
+			
+		}
+		@include bp(laptopxs) {
+			padding-left: 100px;
+			
+		}
+	}
+
+}
+
+.is-style-section, .wp-block-cover.is-style-section{
+	padding: rem(67) 0 rem(35);
+	@include bp(tablet){
+	  padding: rem(100) 0 rem(60);
+	}
+	@include bp(laptopxl){
+	  padding: rem(230) 0;
+	}
+  
+	
+  }
+
+  .fire-bg {
+	background-image: url(/wp-content/uploads/2021/01/Group-37.svg);
+	background-repeat: no-repeat; 
+    background-size: contain; 
+    background-position: center;
+    position: relative;
+    overflow: visible;
+
+    &.--right{
+        background-image: none;
+        padding: 200px 0;
+
+        &::after{
+            content: '';
+            background-image: url(/wp-content/uploads/2021/01/Group-37.svg);
+            background-repeat: no-repeat; 
+            background-size: 40%; 
+            background-position: center;
+            position: absolute;
+            right: -75%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+
+	.woocommerce ul.products li.product .woocommerce-loop-category__title {
+		font-size: rem(13);
+	}
+}
+
+.products {
+	&.columns-4 {
+		@extend .fire-bg;
+	}
+}
+
+.post-type-archive-product {
+	.site-main {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column-reverse;
 	}
 }

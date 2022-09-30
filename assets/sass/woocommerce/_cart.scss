@@ -56,7 +56,7 @@
     .shipping_calculator {
       width: 48%;
 
-      @include clearfix();
+      @include clearfix(); 
       clear: right;
       float: right;
 

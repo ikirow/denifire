@@ -38,7 +38,9 @@ if ( ! empty( $block['align'] ) ) {
                     <?php echo wp_get_attachment_image( $image, $size ); ?>
 				<?php endif; ?>
 				<label>
-					<?php the_sub_field( 'label' ); ?>
+					<a href="<?php the_sub_field( 'file_link' ); ?>">
+						<?php the_sub_field( 'label' ); ?>
+					</a>
 				</label>
                 
             </div>

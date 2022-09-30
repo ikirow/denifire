@@ -266,3 +266,114 @@ add_action('plugins_loaded', function () { // Trigger after the TriggerBrowsersy
         new TriggerBrowsersync();
     }
 });
+
+
+/**
+ * Change number of products that are displayed per page (shop page)
+ */
+add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
+
+function new_loop_shop_per_page( $cols ) {
+  // $cols contains the current number of products per page based on the value stored on Options –> Reading
+  // Return the number of products you wanna show per page.
+  $cols = 15;
+  return $cols;
+}
+
+function custom_render_block_wc_product_categories(string $block_content, array $block): string
+{
+    if(
+        $block['blockName'] !== 'woocommerce/product-categories'
+        || is_admin()
+        || wp_is_json_request()
+    ) {
+        return $block_content;
+    }
+
+    $html = '';
+
+    global $wp;
+    $current_slug = trim($wp->request,'/');
+
+    $dom = new DOMDocument();
+    $dom->loadHTML($block_content);
+    $elements = $dom->getElementsByTagName('a');
+
+    if( $elements['length'] ){
+        foreach ($elements as $node){
+            $href = parse_url($node->getAttribute('href'));
+            $path = trim($href['path'], '/');
+
+            if( $path === $current_slug ){
+                $class = $node->parentNode->getAttribute('class');
+                $class .= ' current-category-item';
+                $node->parentNode->setAttribute('class', $class);
+                break;
+            }
+        }
+    }
+
+    $html .= "<div class='block-outer-wrapper'>";
+    $html .= "<header><h4>" . __('Categories','woocommerce') . "</h4></header>";
+    $html .= $dom->saveHTML();
+    $html .= "</div>";
+
+    return $html;
+}
+add_filter('render_block', 'custom_render_block_wc_product_categories', 10, 2);
+
+
+//Exact match for sku search with relevanssi
+add_filter( 'relevanssi_hits_filter', 'rlv_sku_exact_match' );
+function rlv_sku_exact_match( $hits ) {
+    global $wpdb;
+    $post_ids = $wpdb->get_col(
+		$wpdb->prepare(
+			"SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_sku' AND meta_value = %s",
+			$hits[1]
+		)
+	);
+    if ( ! $post_ids ) {
+		// No matches found, don't touch the results.
+        return $hits;
+    }
+	// Return only results with ID numbers that are in $post_ids.
+	$hits[0] = array_filter(
+		$hits[0],
+		function( $hit ) use ( $post_ids ) {
+			return in_array( $hit->ID, $post_ids, false );
+		}
+	);
+	return $hits;
+}
+
+
+
+
+// if (get_locale() == 'en_GB') {
+//     add_filter( 'get_search_form', 'rlv_modify_search_form' );
+//     function rlv_modify_search_form( $form ) {
+//         $form = str_replace( 'value="Search by name or product number"', 'value="Find"', $form );
+//         return $form;
+//     }
+// } else {
+//     add_filter( 'get_search_form', 'rlv_modify_search_form' );
+//     function rlv_modify_search_form( $form ) {
+//         $form = str_replace( 'value="Търси по име или продуктов номер"', 'value="Find"', $form );
+//         return $form;
+//     }
+// }
+
+add_filter( 'relevanssi_search_form', 'rlv_fix_placeholder' );
+function rlv_fix_placeholder( $form ) {
+  $placeholder_text = 'Search';
+  
+  if ( get_locale() == 'en_GB' ) {
+    $placeholder_text .= ' Search by name or product number';
+  }
+
+  if ( get_locale() == 'bg_BG' ) {
+    $placeholder_text .= ' Search by name or product number';
+  }
+  return str_replace( 'placeholder="Search"', 'placeholder="' . $placeholder_text . '"', $form );
+}

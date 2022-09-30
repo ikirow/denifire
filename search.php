@@ -8,13 +8,16 @@
  */
 
 get_header();
+get_template_part( 'template-parts/content-post', 'hero' );
 ?>
 
-	<section id="primary" class="content-area wrapper">
-		<main id="main" class="site-main">
-
+	<section id="primary" class="content-area wrapper search-page">
+	<aside id="secondary" class="widget-area">
+		<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	</aside><!-- #secondary -->
+		<main id="main" class="site-main ">
+		
 		<?php if ( have_posts() ) : ?>
-
 			<header class="page-header">
 				<h1 class="page-title">
 					<?php
@@ -23,6 +26,8 @@ get_header();
 					?>
 				</h1>
 			</header><!-- .page-header -->
+			<section class="search-grid">
+			
 
 			<?php
 			/* Start the Loop */
@@ -37,7 +42,9 @@ get_header();
 				get_template_part( 'template-parts/content', 'search' );
 
 			endwhile;
-
+			?>
+			</section>
+			<?php
 			the_posts_navigation();
 
 		else :

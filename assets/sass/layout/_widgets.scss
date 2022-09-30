@@ -40,12 +40,12 @@
 	}
 
 	.children {
-		max-height: 0;
+		max-height: 0!important;
 		overflow: hidden;
 		transition: all 0.25s ease-out;
 
 		&.active{
-			max-height: 300px;
+			max-height: 700px!important;
 		}
 		a{ 
 			text-transform: capitalize;

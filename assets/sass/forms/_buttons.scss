@@ -25,7 +25,21 @@ input[type="submit"] {
 	
 }
 
-.red-button, .is-style-red-button .wp-block-button__link{
+.search-field {
+	border-radius: 0!important;
+	padding-left: 21px!important;
+	min-height: 46px!important;
+	border: 0!important;
+
+	@include bp(tablet) {
+		min-width: 320px;
+		
+	}
+}
+
+
+
+.red-button, .is-style-red-button .wp-block-button__link, .search-submit{
 		appearance: none;
 		border: 0;
 		background-color: $color-red!important;;
@@ -63,4 +77,15 @@ input[type="submit"]{
 	&.red-button{
 		@extend .red-button;
 	}	
+}
+
+.search-form {
+	display: flex;
+	margin-bottom: rem(30);
+	
+	.search-submit {
+		min-width: rem((139));
+		border-radius: 0;
+		border: 0;
+	}
 }

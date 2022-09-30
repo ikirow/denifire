@@ -174,30 +174,3 @@
     }
 }
 
-.fire-bg {
-	background-image: url(http://denifire.test/wp-content/uploads/2021/01/Group-37.svg);
-	background-repeat: no-repeat; 
-    background-size: contain; 
-    background-position: center;
-    position: relative;
-    overflow: visible;
-
-    &.--right{
-        background-image: none;
-        padding: 200px 0;
-
-        &::after{
-            content: '';
-            background-image: url(http://denifire.test/wp-content/uploads/2021/01/Group-37.svg);
-            background-repeat: no-repeat; 
-            background-size: 40%; 
-            background-position: center;
-            position: absolute;
-            right: -75%;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-    }
-}

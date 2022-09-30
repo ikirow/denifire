@@ -106,14 +106,14 @@
     <?php
 
     $show_hero = false;
-    if(is_archive() || is_singular('product')|| is_home()){
+    if(is_archive() || is_singular('product')|| is_home() || is_search()){
         $show_hero = true;
     }elseif ((is_page() || is_single()) && !(get_field( 'show_hero' ) === false)){
         $show_hero = true;
     }
 
     $show_title = false;
-    if((is_page() || is_singular('post')) && !(get_field( 'show_hero' ) === false)){
+    if((is_page() || is_singular('post')) || is_search() && !(get_field( 'show_hero' ) === false)){
         $show_title = true;
     }else if(is_archive() || is_home()){
         $show_title = true;
@@ -122,6 +122,8 @@
     $title = get_the_title();
     if(is_archive() || is_home()){
         $title = get_the_archive_title();
+    } else if (is_search()){
+        $title = 'Search results';
     }
 
     ?>
@@ -138,3 +140,13 @@
     <?php } ?>
 
     <div id="content" class="site-content <?php if((get_field( 'show_hero' ) === false) || is_front_page()){echo 'no-hero';}?>">
+
+    <div class="container">
+    <?php
+        if(is_product_category() || is_shop()) {
+            echo  do_shortcode('[searchform]');
+        }
+    ?>
+    </div>
+
+    

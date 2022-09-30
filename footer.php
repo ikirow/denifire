@@ -55,7 +55,7 @@
             <div class="site-info">
                 <?php
                 /* translators: 1: Theme name, 2: Theme author. */
-                printf( esc_html__( 'Denifire Ltd. © 2005 - %1$s %2$s ', 'denifire' ), date("Y"), 'ПОЖАРОГАСИТЕЛИ, ПРОТИВОПОЖАРНА ТЕХНИКА - ДЕНИ ФАЙЕР ООД.' );
+                printf( esc_html__( 'Denifire Ltd. © 2005 - %1$s %2$s ', 'denifire' ), date("Y"), esc_html__( 'ПОЖАРОГАСИТЕЛИ, ПРОТИВОПОЖАРНА ТЕХНИКА - ДЕНИ ФАЙЕР ООД.', 'denifire' ) );
                 
                 ?>
                  <a href="https://webiz.team" target="_blank" style="color: #fff;">Webiz - Web Design and Development</a>
