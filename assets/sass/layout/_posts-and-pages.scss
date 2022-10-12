@@ -511,5 +511,31 @@
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: column-reverse;
+
+		.woocommerce-breadcrumb {
+			order: 2;
+		}
 	}
+}
+
+.pagination_wrap{
+	padding-top: rem(20);
+    ul{
+        list-style: none outside none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li{
+            &.active{
+                background: #e6e6e6;
+            }
+           a{
+               border: 1px solid #e6e6e6;
+               display: inline-block;
+               padding: 7px 9px 5px;
+               line-height: 1;
+               margin: 0 4px;;
+           }
+        }
+    }
 }

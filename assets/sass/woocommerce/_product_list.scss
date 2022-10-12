@@ -414,7 +414,7 @@
 
   .woocommerce-loop-product__link{
     background: #fff;
-    padding: 20px 33px;
+    padding: 20px 15px;
 
     &:hover{
       box-shadow: 0 3px 10px rgba(0,0,0,0.1
@@ -430,8 +430,9 @@
 .widget_product_categories {
   .current-cat, .current-cat-parent {
     .children {
-      padding-bottom: rem(20);
-      max-height: 700px!important;
+      // padding-bottom: rem(20);
+      max-height: 1200px;
+      overflow: auto;
     }
     >a {
       color: $color-red;

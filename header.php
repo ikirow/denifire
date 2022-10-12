@@ -143,7 +143,7 @@
 
     <div class="container">
     <?php
-        if(is_product_category() || is_shop()) {
+        if(is_product_category() || is_shop() || is_search()) {
             echo  do_shortcode('[searchform]');
         }
     ?>

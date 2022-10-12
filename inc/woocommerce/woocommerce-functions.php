@@ -83,23 +83,8 @@ function denifire_woocommerce_active_body_class( $classes ) {
 }
 add_filter( 'body_class', 'denifire_woocommerce_active_body_class' );
 
-/**
- * Related Products Args.
- *
- * @param array $args related products args.
- * @return array $args related products args.
- */
-function denifire_woocommerce_related_products_args( $args ) {
-    $defaults = array(
-        'posts_per_page' => 3,
-        'columns'        => 3,
-    );
 
-    $args = wp_parse_args( $defaults, $args );
 
-    return $args;
-}
-add_filter( 'woocommerce_output_related_products_args', 'denifire_woocommerce_related_products_args' );
 
 /**
  * Remove default WooCommerce wrapper.
@@ -298,9 +283,20 @@ function add_make_request_button()
     <?php
 }
 
+
+
 /**
  * Add wrapper around product name and product details.
  */
+
+add_action( 'woocommerce_before_single_product_summary', 'add_product_wrapper_before', 6  );
+function add_product_wrapper_before()
+{
+    ?>
+        <section class='product__Wrapper flex'>
+    <?php
+}
+
 add_action( 'woocommerce_before_single_product_summary', 'add_summary_wrapper_before', 24  );
 function add_summary_wrapper_before()
 {
@@ -309,8 +305,14 @@ function add_summary_wrapper_before()
     <?php
 }
 
+add_action( 'woocommerce_before_single_product_summary', 'add_sidebar', 5  );
+function add_sidebar()
+{
+   dynamic_sidebar( 'sidebar-1' ); 
+}
 
-add_action( 'woocommerce_after_single_product_summary', 'add_summary_wrapper_after' ); 
+
+add_action( 'woocommerce_after_single_product_summary', 'add_summary_wrapper_after', 23 ); 
 function add_summary_wrapper_after()
 {
     ?>
@@ -348,7 +350,7 @@ function add_thumbanil_wrapper_before()
 }
 
 
-add_action( 'woocommerce_before_single_product_summary', 'add_thumbanil_wrapper_after', 23 ); 
+add_action( 'woocommerce_before_single_product_summary', 'add_thumbanil_wrapper_after', 22 ); 
 function add_thumbanil_wrapper_after()
 {
     ?>
@@ -356,13 +358,41 @@ function add_thumbanil_wrapper_after()
     <?php
 }
 
+
+add_action( 'woocommerce_after_single_product_summary', 'add_product_wrapper_after', 29  );
+function add_product_wrapper_after()
+{
+    ?>
+        <section>
+    <?php
+}
+
+/**
+ * Related Products Args.
+ *
+ * @param array $args related products args.
+ * @return array $args related products args.
+ */
+function denifire_woocommerce_related_products_args( $args ) {
+    $defaults = array(
+        'posts_per_page' => 3,
+        'columns'        => 3,
+    );
+
+    $args = wp_parse_args( $defaults, $args );
+
+    return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'denifire_woocommerce_related_products_args' );
+
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+add_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 25);
+
 /**
  * Add contact form.
  */
 
-
-
-add_action( 'woocommerce_after_single_product', 'add_contact_form' );
+add_action( 'woocommerce_after_single_product', 'add_contact_form', 15 );
 
 function add_contact_form()
 {    

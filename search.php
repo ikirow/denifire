@@ -44,9 +44,10 @@ get_template_part( 'template-parts/content-post', 'hero' );
 			endwhile;
 			?>
 			</section>
+			<div class="pagination_wrap">
+				<?php numeric_pagination();?>
+			</div>
 			<?php
-			the_posts_navigation();
-
 		else :
 
 			get_template_part( 'template-parts/content', 'none' );

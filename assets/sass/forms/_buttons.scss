@@ -82,6 +82,7 @@ input[type="submit"]{
 .search-form {
 	display: flex;
 	margin-bottom: rem(30);
+	justify-content: center;
 	
 	.search-submit {
 		min-width: rem((139));

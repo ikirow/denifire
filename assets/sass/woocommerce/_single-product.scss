@@ -4,7 +4,7 @@
 
 .type-product{
 	display: flex;
-	flex-wrap: wrap;
+	// flex-wrap: wrap;
 	max-width: $site_width;
 	justify-content: space-between;
 
@@ -20,11 +20,23 @@
 		}
 	}
 
+	.widget_product_categories {
+		display: none;
+		@include bp(laptopxs) {
+			display: block;
+		}
+	}
+
 	.entry-summary{
 		margin-bottom: 20px;
 		@include bp (laptopxsdown){
 			padding: 0 10px;
 		}
+	}
+
+	.product__Wrapper {
+		display: flex;
+		flex-wrap: wrap;
 	}
 
 	.woocommerce-Tabs-panel {
@@ -38,6 +50,7 @@
 
 	.product__summaryWrapper {
 		width: calc(63% - 41px);
+		padding-left: rem(20);
 		
 		@include bp (phonexldown){
 			width: 100%;
