@@ -427,16 +427,7 @@
   box-shadow: none;
 }
 
-.widget_product_categories {
-  .current-cat, .current-cat-parent {
-    .children {
-      // padding-bottom: rem(20);
-      max-height: 1200px;
-      overflow: auto;
-    }
-    >a {
-      color: $color-red;
-      font-weight: bold;
-    }
-  }
+
+.woocommerce.columns-4 ul.products li.product a img, .woocommerce-page ul.products.columns-4 li.product a img{
+  margin: 0 0 0 auto;
 }

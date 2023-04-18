@@ -70,8 +70,8 @@
 
 .image-andtext-with-custom-bg-holder {
 
-	img {
-		// transform: scale(1.1);
+	.kt-row-column-wrap {
+		padding-top: 0;
 	}
 }
 
@@ -286,10 +286,10 @@
 }
 
 .home__hero {
-	img {
-		max-height: 500px;
+	img { 
 		margin: 0 auto;
 		width: auto;
+		transform: scale(1.2);
 	}
 }
 .home {
@@ -377,6 +377,7 @@
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
 	grid-gap: rem(30);
+	margin-bottom: rem(50);
 
 	@include bp(tablet) {
 		grid-template-columns:  repeat(3, 1fr);
@@ -384,11 +385,13 @@
 
 	img{
 		max-height: rem(201);
+		height: rem(201);
 		object-fit: contain;
 	}
 
 	.product {
 		background-color: $color-white;
+		padding: rem(20);
 	}
 
 	h2, p {
@@ -421,7 +424,7 @@
 
 .image-heading {
 	margin-bottom: 0; 
-	color: #dddddd;
+	color: #bdbdbd;
 	font-size: rem(50);
 		bottom: rem(-19);
 		position: relative;
