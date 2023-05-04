@@ -41,6 +41,9 @@ if ( ! empty( $block['align'] ) ) {
 				<?php if ( $link ) : ?>
 					<a href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>"><?php echo esc_html( $link['title'] ); ?></a>
 				<?php endif; ?>
+				<?php if ( !$link ) : ?>
+					<p><?php the_sub_field( 'text' ); ?></p>				
+				<?php endif; ?>
 			</div>			
 		<?php endwhile; ?>
 	<?php else : ?>

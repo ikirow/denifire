@@ -123,7 +123,11 @@
     if(is_archive() || is_home()){
         $title = get_the_archive_title();
     } else if (is_search()){
-        $title = 'Search results';
+        if (get_locale() == 'en_GB') {
+            $title = 'Search results';
+        } else {
+            $title = 'Резултати';
+        }
     }
 
     ?>
@@ -133,7 +137,8 @@
         ?>
         <div class="hero_section <?php if($show_title){ echo 'with-title';}?>">
             <?php if($show_title){ ?>
-                <h1><?php echo $title;?></h1>
+                <h1><?php echo __($title , 'denifire');?></h1>
+                
             <?php } ?>
         </div>
         <?php } ?>

@@ -40,8 +40,7 @@ function denifire_scripts() {
         get_template_directory_uri() . '/assets/js/app.js',
         array( 'jquery' ),
         filemtime(
-            get_template_directory
-            () .
+            get_template_directory() .
             '/assets/js/app.js' ), true
     );
 

@@ -37,6 +37,10 @@
 	.product__Wrapper {
 		display: flex;
 		flex-wrap: wrap;
+
+		>h1{
+			display: none;
+		}
 	}
 
 	.woocommerce-Tabs-panel {
@@ -537,13 +541,6 @@ div.product {
 				transform: scale(1.5, 1.5);
 			}
 		}
-	}
-}
-
-.mobile-only{
-	margin-top: 50px;
-	@include bp(tablet){
-		display: none;
 	}
 }
 

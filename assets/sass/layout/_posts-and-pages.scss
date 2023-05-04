@@ -542,3 +542,50 @@
         }
     }
 }
+
+.error404 {
+	.site-content {
+		padding-top: 0;
+	}
+
+	p{
+		text-align: center;
+	}
+
+	.page-content {
+		padding-top: rem(50);
+	}
+}
+
+.entry-content {
+	.wp-block-spacer {
+		&:first-of-type{
+			display: none;
+
+			@include bp(laptopxs) {
+				display: block;
+			}
+		}
+	}
+}
+
+.centered-form {
+	p{
+		text-align: center;
+	}
+
+	.codedropz-upload-handler {
+		@include bp(tablet) {
+			max-width: rem(400);
+			margin: rem(50) auto;
+		}
+	}
+
+	.wpcf7-spinner {
+		display: none;
+	}
+}
+
+.rc-anchor, .rc-anchor-invisible {
+	display: none!important;
+}

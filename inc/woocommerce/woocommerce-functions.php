@@ -428,7 +428,12 @@ function add_contact_form()
                 </div>
             </div>
     <?php
-    echo do_shortcode( '[contact-form-7 id="11" title="Contact form 1"]' ); 
+    
+    if (get_locale() == 'en_GB') {
+        echo do_shortcode( '[contact-form-7 id="7027" title="Service inquiry"]' ); 
+    } else {
+        echo do_shortcode( '[contact-form-7 id="11" title="Contact form 1"]' ); 
+    }
     ?>
         </section>
     <?php
@@ -470,7 +475,7 @@ add_action( 'woocommerce_before_single_product_summary', 'add_heading_before_pro
 function add_heading_before_product_image(){
     global $product;
     ?>
-        <h1 class="mobile-only">
+        <h1 >
             <?php
                 echo $product->get_name();
             ?>

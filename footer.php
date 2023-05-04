@@ -18,7 +18,7 @@
     <div class="wrapper">
         <div class="row ">
 
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <div class="site-branding">
                     <?php
                     // Site logo
@@ -31,7 +31,7 @@
                 </div><!-- .site-branding -->
             </div>
 
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <nav class="footer-navigation">
                     <?php
                     wp_nav_menu( array(
@@ -41,11 +41,21 @@
                 </nav><!-- #site-navigation -->
             </div>
 
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <nav class="footer-navigation">
                     <?php
                     wp_nav_menu( array(
                         'theme_location' => 'footer-2',
+                    ) );
+                    ?>
+                </nav><!-- #site-navigation -->
+            </div>
+
+            <div class="col-xs-3">
+                <nav class="footer-navigation">
+                    <?php
+                    wp_nav_menu( array(
+                        'theme_location' => 'footer-3',
                     ) );
                     ?>
                 </nav><!-- #site-navigation -->

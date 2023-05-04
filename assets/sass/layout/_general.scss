@@ -23,6 +23,7 @@ body {
 .site-content {
   padding-top: 3rem;
   &.no-hero{
+    
     padding-top: 0!important;
   }
   // margin-top: -59px;
@@ -31,6 +32,13 @@ body {
   }
 }
 
+.home {
+  .site-content {
+    &.no-hero{
+      padding-top: 3rem!important;
+    }
+  }
+}
 
 .centered{
   margin: 0 auto!important;

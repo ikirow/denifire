@@ -16,7 +16,7 @@ a {
 	text-decoration: none;
 
 	&:visited {
-		color: $color__link-visited;
+		color: inherit;
 	}
 	&:hover,
 	&:focus,
@@ -25,7 +25,7 @@ a {
 		text-decoration: underline;
 	}
 	&:focus {
-		outline: thin dotted;
+		outline: none;
 	}
 	&:hover,
 	&:active {

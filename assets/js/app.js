@@ -7,7 +7,7 @@
 		let categoryDropDownTrigger = $('#woocommerce_product_categories-2 .cat-item')
 
 
-		$( window ).load(function() {
+		$( document ).ready(function() {
 			$('.cat-parent').append(showMoreBtn);
 			// $('.current-cat').find('.children').toggleClass('active');
 			$('.current-cat > a').toggleClass('active');

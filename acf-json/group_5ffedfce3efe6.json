@@ -59,6 +59,25 @@
                         "id": ""
                     },
                     "return_format": "array"
+                },
+                {
+                    "key": "field_644a33ae33f23",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "Fill in if no link is nessecary",
+                    "append": "",
+                    "maxlength": ""
                 }
             ]
         }
@@ -68,7 +87,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "all"
+                "value": "acf\/image-link-repeater"
             }
         ]
     ],
@@ -80,5 +99,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1610637180
+    "show_in_rest": 0,
+    "modified": 1682584559
 }
