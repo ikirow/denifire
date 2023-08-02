@@ -36,6 +36,10 @@ body {
   .site-content {
     &.no-hero{
       padding-top: 3rem!important;
+
+      @include bp(laptopxs) {
+        padding-top: 0!important;
+      }
     }
   }
 }

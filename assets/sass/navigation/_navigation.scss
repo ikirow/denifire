@@ -35,7 +35,7 @@
         width: 100%;
         display: block;
         position: relative;
-        padding: 1em;
+        
         margin: 0;
         overflow: hidden;
         transition: max-height .15s .15s, padding .15s .15s, margin .15s .15s;
@@ -43,6 +43,7 @@
         font-size: em(17);
         a {
           transition: max-height .15s .15s, padding .15s .15s, margin .15s .15s;
+          padding: 1em;
         }
       }
 

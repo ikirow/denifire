@@ -18,6 +18,10 @@
   .site-branding {
     max-width: 190px;
     margin-left: 50px;
+
+    .custom-logo{
+      width: rem(150)
+    }
   }
 
 
@@ -95,4 +99,43 @@
   }
 }
 
+.facebook {
+  width: rem(30);
+  height: rem(20);
+  overflow: hidden;
+  text-indent: 1000px;
+  background-color: #fff;
+  mask-image: url('../icons/logo-facebook.svg');
+  mask-repeat: no-repeat;
+  mask-position: 20px center;
+  height: rem(50);
+  width: 30%!important;
+  display: inline-flex!important;
+
+
+  @include bp(laptopxs) {
+    padding-top: 0;
+    margin-bottom: initial!important;
+    width: rem(30)!important;
+    height: auto;
+    mask-position:  center;
+  }
+
+  a{
+
+    @include bp(laptopxs) {
+      height: rem(20);
+    }
+  }
+}
+
+.instagram{
+  @extend .facebook;
+  mask-image: url('../icons/logo-instagram.svg');
+}
+
+.phone {
+  @extend .facebook;
+  mask-image: url('../icons/phone-call.svg');
+}
 

@@ -11,7 +11,7 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
+<!-- <html <?php language_attributes(); ?>> -->
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,8 +58,9 @@
                 ?>
 
             </div><!-- .site-branding -->
-
+            
             <nav id="site-navigation" class="main-navigation">
+           
                 <div class="hamburger menu-toggle" aria-controls="primary-menu"
                         aria-expanded="false">
                     <span></span>
@@ -148,7 +149,7 @@
 
     <div class="container">
     <?php
-        if(is_product_category() || is_shop() || is_search()) {
+        if(is_product_category() || is_shop() || is_search() || is_product()) {
             echo  do_shortcode('[searchform]');
         }
     ?>

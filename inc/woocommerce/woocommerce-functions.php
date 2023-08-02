@@ -278,7 +278,7 @@ function add_make_request_button()
 {
     ?>
         <a href="#form__request" class="red-button product__requestBtn">
-            Направи запитване
+            <?php echo __('Направи запитване:', 'denifire') ?>
         </a>
     <?php
 }
@@ -328,13 +328,27 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 add_action( 'woocommerce_single_product_summary', 'show_sku_singl_product_page', 5 );
 function show_sku_singl_product_page(){
     global $product;
+    $catalouge_number = $product->get_attribute( 'CODE' );
     ?>
         <div class="single-product__sku">
-            <p>Продуктов код:</p>
+            <p><?php echo __('Продуктов код:', 'denifire') ?></p>
             <p>
                 <?php echo $product->get_sku(); ?>
             </p>
         </div>
+        <?php
+            if ($catalouge_number) {
+                ?>
+                    <div class="single-product__sku">
+                        <p><?php echo __('Каталожен номер:', 'denifire') ?></p>
+                        <p>
+                            <?php echo $catalouge_number ?>
+                        </p>
+                    </div>
+                <?php
+            }
+        ?>
+        
     <?php
 }
 
@@ -401,7 +415,7 @@ function add_contact_form()
         
         <section id="form__request" class="form__request">
             <h1>
-                направи запитване
+                <?php echo __('направи запитване', 'denifire') ?>
             </h1>
             <div class="form__request--header">
                 <div>
@@ -418,7 +432,7 @@ function add_contact_form()
                 </div>
                 <div>
                     <p>
-                        Продуктов код
+                        <p><?php echo __('Продуктов код:', 'denifire') ?></p>
                     </p>
                     <h2>
                         <?php

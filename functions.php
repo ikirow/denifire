@@ -225,7 +225,7 @@ require get_template_directory() . '/inc/register-block-styles.php';
 // ACF Gutenberg blocks
 require get_template_directory() . '/inc/register-blocks.php';
 // ACFInclude theme options
-//require get_template_directory() . '/inc/register-theme-options.php';
+// require get_template_directory() . '/inc/register-theme-options.php';
 
 /**
  * Register custom post types and taxonomies
@@ -407,3 +407,15 @@ function contact_form_7_enqueue_scripts($out)
     }
     return $out;
 }
+
+/*
+ * Change WP Login file URL using "login_url" filter hook
+ * https://developer.wordpress.org/reference/hooks/login_url/
+ */
+add_filter( 'login_url', 'custom_login_url', PHP_INT_MAX );
+function custom_login_url( $login_url ) {
+	$login_url = site_url( 'denifire-signin.php', 'login' );	
+    return $login_url;
+}
+
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );

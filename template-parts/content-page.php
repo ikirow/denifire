@@ -13,11 +13,11 @@
 
 	<div class="entry-content">
 
-		<h1 class="page-title">
+		<!-- <h1 class="page-title">
 			<?php 
-				the_title()
+				// the_title()
 			?>
-		</h1>
+		</h1> -->
 		<?php
 		the_content();
 
