@@ -443,7 +443,7 @@ function add_contact_form()
             </div>
     <?php
     
-    if (get_locale() == 'en_GB') {
+    if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
         echo do_shortcode( '[contact-form-7 id="7027" title="Service inquiry"]' ); 
     } else {
         echo do_shortcode( '[contact-form-7 id="11" title="Contact form 1"]' ); 
