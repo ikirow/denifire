@@ -191,3 +191,72 @@ function numeric_pagination() {
     echo '</ul></div>' . "\n";
 
 }
+
+if ( ! function_exists( 'singleblog_entry_meta_nds' ) ) :
+	function singleblog_entry_meta_nds( $postID ) {
+		$delimiter = " | ";
+		global $post;
+		/* translators: %1$s: current date, %2$s: current time */
+        $post_ID = ( isset( $postID ) ? $postID : $post->ID );
+
+		echo '<div class="entry_meta">';
+		echo '<div class="entry_meta_info has-d-font-size">';
+		echo '<time class="updated" datetime="' . get_the_time( 'c' ) . '">' . get_the_date()  . '</time>';
+		echo $delimiter;
+		echo ( display_read_time( $post_ID ) ? "<p class='read_time'>" . display_read_time( $post_ID ) . " " . __( 'min read', 'webiz_starter' ) . "</p>" : "" );
+		echo '</div>';
+		//echo '<div class="entry_meta_category"><a href="'.get_category_link(get_the_category($post)[0]).'">'.get_the_category($post)[0]->name.'</a></div>';
+		echo '</div>';
+	}
+endif;
+
+if ( ! function_exists( 'display_read_time' ) ) :
+function display_read_time( $postID ) {
+	$content = get_post_field( 'post_content', $postID );
+	$count_words = str_word_count( strip_tags( $content ) );
+	$read_time = ceil($count_words / 250);
+
+	return $read_time;
+}
+endif;
+
+if ( ! function_exists( 'display_related_posts' ) ) :
+function display_related_posts() {
+	global $post;
+	$related_posts = get_posts(array(
+		'category__in' => wp_get_post_categories($post->ID),
+		'numberposts' => 3,
+		'post__not_in' => array($post->ID)
+	));
+
+	if(!empty($related_posts)) {
+		echo '<div class="related-posts-wrapper">';
+		foreach($related_posts as $related_post) {
+			$category = get_the_category($related_post->ID)[0];
+
+            $template_args = array(
+                'post_ID' => $related_post->ID,
+                'category_name' => $category->name,
+                'image_url' => get_the_post_thumbnail_url($related_post->ID, 'full'),
+                'post_title' => $related_post->post_title,
+                'post_date' => get_the_date('', $related_post->ID),
+                'post_link' => get_permalink($related_post->ID)
+            );
+			get_template_part( 'template-parts/content-related', 'single', $template_args );
+		}
+		echo '</div>';
+	}
+}
+endif;
+
+if ( ! function_exists( 'social_share' ) ) :
+	function social_share() {
+		if ( shortcode_exists( 'kadence_simple_share' ) ) {
+			?>
+			<div class="social_share">
+				<?php echo do_shortcode('[kadence_simple_share]'); ?>
+			</div>
+			<?php
+		}
+	}
+endif;

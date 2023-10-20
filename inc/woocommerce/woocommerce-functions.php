@@ -414,21 +414,21 @@ function add_contact_form()
     ?>  
         
         <section id="form__request" class="form__request">
-            <h1>
+            <h2 class="form__request--heading">
                 <?php echo __('направи запитване', 'denifire') ?>
-            </h1>
+            </h2>
             <div class="form__request--header">
                 <div>
-                    <h1>
+                    <h2 class="form__request--product-name">
                         <?php
                             echo $product->get_name();
                         ?>
-                    </h1>
-                    <h2>
+                    </h2>
+                    <h3>
                         <?php
                             echo $product->get_weight();
                         ?>
-                    </h2>
+                    </h3>
                 </div>
                 <div>
                     <p>
@@ -485,14 +485,22 @@ add_action( 'init', 'iconic_disable_reviews' );
 /*
  * Add heading for mobile
  */
-add_action( 'woocommerce_before_single_product_summary', 'add_heading_before_product_image', 10 );
-function add_heading_before_product_image(){
-    global $product;
+
+
+add_action('woocommerce_show_page_title', 'remove_woocommerce_page_title');
+function remove_woocommerce_page_title() {
+    return false;
+}
+
+//Add disclaimer to the category page
+add_action( 'woocommerce_before_main_content', 'add_disclaimer', 1 );
+// add_action( 'woocommerce_before_single_product', 'add_disclaimer', 10);
+function add_disclaimer() {
     ?>
-        <h1 >
-            <?php
-                echo $product->get_name();
-            ?>
-        </h1>
-    <?php  
+        <div class='container'>
+        <p class="products-disclaimer">
+            <?php echo __('Предлаганите продукти на сайта са с информативна цел. На пазара в Република България се предлагат и предоставят единствено продукти , които са одобрени  и разрешени за продажба съгласно действащите наредби в Република България. ', 'denifire'); ?>
+        </p>
+        </div>
+    <?php
 }

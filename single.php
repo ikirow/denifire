@@ -4,35 +4,32 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package denifire
+ * @package webiz_starter
  */
 
-get_header();
+ get_header();
 
-get_template_part( 'template-parts/content-post', 'hero' );
-
-?>
-
-	<div id="primary" class="content-area wrapper">
-		<aside id="secondary" class="widget-area">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-		</aside><!-- #secondary -->
-		<main id="main" class="site-main">
-			<?php if (function_exists('rank_math_the_breadcrumbs') && !is_front_page()) rank_math_the_breadcrumbs(); ?>
-			<?php
-			while ( have_posts() ) : 
-				the_post();
-
-				get_template_part( 'template-parts/content', 'page' );
-
-
-			endwhile; // End of the loop.
-			?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-
-<?php
-
-get_footer();
+ get_template_part( 'template-parts/content-post', 'header' );
+ 
+ ?>
+ 
+	 <div id="primary" class="single-blog content-area container">
+		 <main id="main" class="site-main blog-relative">
+			 <?php
+			 while ( have_posts() ) :
+				 the_post();
+ 
+				 get_template_part( 'template-parts/content', 'post' );
+ 
+ 
+			 endwhile; // End of the loop.
+			 ?>
+ 
+		 </main><!-- #main -->
+	 </div><!-- #primary -->
+ 
+	 <?php get_template_part( 'template-parts/content-related', 'posts' ); ?>
+ 
+ <?php
+ 
+ get_footer();

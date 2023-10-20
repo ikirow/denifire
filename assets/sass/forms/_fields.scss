@@ -153,7 +153,7 @@ textarea {
 		}
 	}
 	
-	> h1 {
+	> .form__request--heading {
 		width: 100%;
 		text-transform: uppercase;
 		font-size: em(26);
@@ -196,12 +196,12 @@ textarea {
 		padding: 22px 32px 25px;
 	}
 
-	h1, p {
+	.form__request--product-name, p {
 		font-size: em(16);
 		font-weight: bold;
 	}
 
-	h2 {
+	h3 {
 		color: $color-red;
 		font-weight: bold;
 	}

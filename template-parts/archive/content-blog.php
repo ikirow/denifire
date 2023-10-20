@@ -10,7 +10,7 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>	
 
-        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail();  ?></a>
+        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('blog-iamge');  ?></a>
 
 
         <?php        
@@ -19,7 +19,7 @@
         else :
             
         ?>
-            <a href="<?php the_permalink(); ?>"><?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );; ?></a>
+            <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );; ?>
         <?php
         
         endif;
@@ -27,12 +27,9 @@
         if ( 'post' === get_post_type() ) :
             
             ?>                    
-            <div class="entry-meta">
-                <?php
-                denifire_posted_on();
-                denifire_posted_by();
-                ?>
-            </div><!-- .entry-meta -->
+            <div class="bsh-meta">
+                <?php singleblog_entry_meta_nds( false );  ?>
+            </div>
         <?php endif; ?>
     
 	<?php

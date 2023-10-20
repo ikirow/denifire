@@ -226,6 +226,7 @@
 		@extend .content-area;
 		@include flex-wrap(wrap);
 		max-width: calc(100% - 350px);
+		margin: 0 auto;
 
 		@include bp(laptopxsdown) {
 			max-width: calc(100% - 250px);
@@ -259,12 +260,15 @@
 	}
 
 	.post {
-		margin-bottom: 50px;
+		// margin-bottom: 50px;
 	}
 
 }
 
 .post-template-default {
+	.site-content {
+		padding-top: 0;
+	}
 	&.single {
 		//padding-top: 150px;
 		.entry-content{
@@ -387,6 +391,11 @@
 		max-height: rem(201);
 		height: rem(201);
 		object-fit: contain;
+		margin: 0 auto;
+	}
+
+	.post-thumbnail {
+		display: flex;
 	}
 
 	.product {
@@ -588,4 +597,21 @@
 
 .rc-anchor, .rc-anchor-invisible {
 	display: none!important;
+}
+
+.products-disclaimer {
+	font-size: rem(14);
+	max-width: 70%;
+	text-align: center;
+	margin: rem(20) auto;
+}
+
+// .woocommerce-shop {
+// 	.products-disclaimer{
+// 		display: none;
+// 	}
+// }
+
+.woocommerce-pagination {
+	margin-bottom: rem(60);
 }

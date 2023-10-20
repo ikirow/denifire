@@ -192,6 +192,8 @@ if ( !function_exists( 'denifire_setup' ) ) :
          * Add Image Sizes here
          */
         // add_image_size( 'hero-banner', 1920, 250, array( 'center' , 'center' ), true ); // Wide cropped banner
+        add_image_size( 'blog-iamge', 422, 237 );
+        add_image_size( 'blog-archive-iamge', 355, 237 );
 
     }
 endif;
@@ -287,6 +289,7 @@ function custom_render_block_wc_product_categories(string $block_content, array 
         $block['blockName'] !== 'woocommerce/product-categories'
         || is_admin()
         || wp_is_json_request()
+        || is_home()
     ) {
         return $block_content;
     }
@@ -414,8 +417,9 @@ function contact_form_7_enqueue_scripts($out)
  */
 add_filter( 'login_url', 'custom_login_url', PHP_INT_MAX );
 function custom_login_url( $login_url ) {
-	$login_url = site_url( 'denifire-signin.php', 'login' );	
+	// $login_url = site_url( 'denifire-signin.php', 'login' );	
     return $login_url;
 }
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+

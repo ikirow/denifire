@@ -122,7 +122,11 @@
 
     $title = get_the_title();
     if(is_archive() || is_home()){
-        $title = get_the_archive_title();
+        if (get_locale() == 'en_GB') {
+            $title = 'News';
+        } else {
+            $title = 'Новини';
+        }
     } else if (is_search()){
         if (get_locale() == 'en_GB') {
             $title = 'Search results';
@@ -133,7 +137,7 @@
 
     ?>
 
-    <?php if(!is_front_page()){
+    <?php if(!is_front_page() && !is_single()){
         if($show_hero){
         ?>
         <div class="hero_section <?php if($show_title){ echo 'with-title';}?>">

@@ -13,10 +13,12 @@
 
 		@include bp (phonexldown){
 			width: 100%;
-		}
-
-		@include bp (phonexldown){
 			margin-bottom: 50px;
+		}
+		
+
+		@include bp(tabletdown) {
+			padding-top: rem(80);
 		}
 	}
 
@@ -25,10 +27,22 @@
 		@include bp(laptopxs) {
 			display: block;
 		}
+		>p{
+			font-weight: bold;
+			font-size: rem(20);
+			@include bp(laptopxs) {
+				font-size: rem(26);
+			}
+		}
 	}
 
 	.entry-summary{
 		margin-bottom: 20px;
+
+		@include bp(tabletdown) {
+			padding-top: rem(20)!important;
+		}
+
 		@include bp (laptopxsdown){
 			padding: 0 10px;
 		}
@@ -38,14 +52,16 @@
 		display: flex;
 		flex-wrap: wrap;
 
-		>h1{
-			display: none;
+		>h2{
+			@include bp(tablet){
+				display: none;
+			}
 		}
 	}
 
 	.woocommerce-Tabs-panel {
 		h2{
-			@include bp (phonexldown){
+			@include bp (tabletdown){
 				width: 100%;
 				text-align: center;
 			}
@@ -56,7 +72,7 @@
 		width: calc(63% - 41px);
 		padding-left: rem(20);
 		
-		@include bp (phonexldown){
+		@include bp (tabletdown){
 			width: 100%;
 		}
 	}
@@ -105,7 +121,9 @@ div.product {
 		padding: 0;
 
 		@include bp(tabletdown){
-			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
 		}
 	}
 
