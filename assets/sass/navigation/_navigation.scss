@@ -2,14 +2,41 @@
   clear: both;
   display: block;
   color: $color-white;
-  
-  
-  @include bp(laptopxs){
+
+  @include bp(laptopxs) {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     align-content: center;
     width: calc(100% - 150px);
+  }
+
+  .wpml-ls-item {
+    @include bp(laptopxsdown) {
+      overflow: visible !important;
+      margin: 0 !important;
+    }
+    ul {
+      @include bp(laptopxsdown) {
+        opacity: 1 !important;
+        background-color: transparent;
+        padding-top: 0 !important;
+        pointer-events: all !important;
+      }
+
+      li {
+        @include bp(laptopxsdown) {
+          overflow: visible !important;
+          margin: 0;
+        }
+
+        a {
+          @include bp(laptopxsdown) {
+            padding: 1rem !important;
+          }
+        }
+      }
+    }
   }
 
   ul {
@@ -18,7 +45,7 @@
     margin: 0;
     padding-left: 0;
 
-    @include bp(laptopxsdown) {      
+    @include bp(laptopxsdown) {
       opacity: 0;
       pointer-events: none;
       position: fixed;
@@ -26,7 +53,7 @@
       left: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      background-color: rgba(0,0,0,0.71);  
+      background-color: rgba(0, 0, 0, 0.71);
       z-index: 5;
       top: 60px;
 
@@ -35,35 +62,33 @@
         width: 100%;
         display: block;
         position: relative;
-        
+
         margin: 0;
         overflow: hidden;
-        transition: max-height .15s .15s, padding .15s .15s, margin .15s .15s;
+        transition: max-height 0.15s 0.15s, padding 0.15s 0.15s,
+          margin 0.15s 0.15s;
         font-weight: bold;
         font-size: em(17);
         a {
-          transition: max-height .15s .15s, padding .15s .15s, margin .15s .15s;
+          transition: max-height 0.15s 0.15s, padding 0.15s 0.15s,
+            margin 0.15s 0.15s;
           padding: 1em;
         }
       }
-
     }
-
- 
-    
   }
 
   .menu-item-has-children {
-    .sub-menu{
+    .sub-menu {
       opacity: 0;
       pointer-events: none;
-      transition: all .2s ease-out;
+      transition: all 0.2s ease-out;
       padding-top: rem(10);
       position: absolute;
 
       li {
         margin: 0 0 0 rem(15);
- 
+
         img {
           width: rem(20);
           height: rem(12);
@@ -78,13 +103,13 @@
     }
 
     &:hover {
-      .sub-menu{
+      .sub-menu {
         opacity: 1;
         pointer-events: all;
-        a{ 
+        a {
           padding: 0;
         }
-      } 
+      }
     }
   }
 
@@ -122,15 +147,13 @@
   .current_page_ancestor > a,
   .current-menu-ancestor > a {
   }
-
 }
-
 
 /* Small menu. */
 
-.main-navigation { 
-  &.toggled{  
-    ul{
+.main-navigation {
+  &.toggled {
+    ul {
       //top: rem(83);
       left: 0;
       width: 100%;
@@ -139,14 +162,13 @@
       opacity: 1;
     }
 
-    &.open{
-      ul{
+    &.open {
+      ul {
         opacity: 1;
         pointer-events: initial;
       }
     }
   }
-  
 }
 
 .menu-toggle {
@@ -160,34 +182,31 @@
   margin-left: auto;
   align-items: flex-end;
 
-  span{
+  span {
     width: 100%;
     height: 1px;
-    background-color: $color-white; 
+    background-color: $color-white;
 
-    &:last-of-type{
+    &:last-of-type {
       width: 70%;
     }
   }
 }
 
 @include bp(laptopxs) {
-
   .menu-toggle {
     display: none;
   }
 
-  .main-navigation ul {    
+  .main-navigation ul {
     @include flexbox();
     @include justify-content(flex-end);
   }
-
 }
 
 .comment-navigation,
 .posts-navigation,
 .post-navigation {
-
   .site-main & {
     margin: 0 0 1.5em;
     overflow: hidden;
@@ -237,7 +256,7 @@ ul.menu {
       }
     }
 
-    .menu-title{
+    .menu-title {
       font-size: em(22);
       font-weight: bold;
     }
@@ -245,6 +264,5 @@ ul.menu {
     @include bp(tablet) {
       padding: 0 1em;
     }
-
   }
 }

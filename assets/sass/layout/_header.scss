@@ -6,26 +6,29 @@
   top: 0;
   padding: 7px 10px;
 
-  @include bp(laptopxs){
+  @include bp(laptopxs) {
     padding: 17px 10px;
     max-height: 80px;
   }
 
-  @include bp(laptopxsdown){
-    background:  $mobile-menu-bg;
+  @include bp(laptopxsdown) {
+    background: $mobile-menu-bg;
   }
 
   .site-branding {
     max-width: 190px;
     margin-left: 50px;
 
-    .custom-logo{
-      width: rem(150)
+    .custom-logo {
+      width: rem(150);
+
+      @include bp(laptopxs) {
+        width: rem(180);
+      }
     }
   }
 
-
-  .row{
+  .row {
     @include flex-wrap(nowrap);
     @include align-items(center);
     padding: 0 20px;
@@ -34,66 +37,62 @@
       @include flex-direction(row-reverse);
     }
   }
-
 }
 
 .woocommerce {
-
-  &.post-type-archive{
-    .site-header{
+  &.post-type-archive {
+    .site-header {
       background-image: none;
     }
 
-    .site-main{
+    .site-main {
       //margin-top: -49px;
     }
   }
 }
 
-#masthead .row{
+#masthead .row {
   @include bp(laptopxsdown) {
-    justify-content: center!important;
+    justify-content: center !important;
     position: relative;
-    .site-branding{
+    .site-branding {
       margin: 0;
     }
-    #site-navigation{
+    #site-navigation {
       position: absolute;
       top: 6px;
       left: 18px;
     }
-
   }
 }
 
-
-.hero_section{
-  background-image: url('../img/main_hero_bg_mobile.jpg');
-  @media(min-width: 420px) {
-    background-image: url('../img/main_hero_bg.jpg');
+.hero_section {
+  background-image: url("../img/main_hero_bg_mobile.jpg");
+  @media (min-width: 420px) {
+    background-image: url("../img/main_hero_bg.jpg");
   }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: rem(60);
-  @include bp(laptopxs){
+  @include bp(laptopxs) {
     min-height: rem(80);
   }
 
   padding: 0;
-  &.with-title{
+  &.with-title {
     padding: rem(85) 0 rem(35);
-    @include bp(laptopxs){
+    @include bp(laptopxs) {
       padding: rem(105) 0 rem(35);
     }
   }
-  h1{
+  h1 {
     text-align: center;
     color: #fff;
     margin: 0;
     font-size: 34px;
     text-shadow: 0px 3px 6px #00000029;
-    @include bp(laptopxs){
+    @include bp(laptopxs) {
       font-size: 42px;
     }
   }
@@ -105,37 +104,34 @@
   overflow: hidden;
   text-indent: 1000px;
   background-color: #fff;
-  mask-image: url('../icons/logo-facebook.svg');
+  mask-image: url("../icons/logo-facebook.svg");
   mask-repeat: no-repeat;
   mask-position: 20px center;
   height: rem(50);
-  width: 30%!important;
-  display: inline-flex!important;
-
+  width: 30% !important;
+  display: inline-flex !important;
 
   @include bp(laptopxs) {
     padding-top: 0;
-    margin-bottom: initial!important;
-    width: rem(30)!important;
+    margin-bottom: initial !important;
+    width: rem(30) !important;
     height: auto;
-    mask-position:  center;
+    mask-position: center;
   }
 
-  a{
-
+  a {
     @include bp(laptopxs) {
       height: rem(20);
     }
   }
 }
 
-.instagram{
+.instagram {
   @extend .facebook;
-  mask-image: url('../icons/logo-instagram.svg');
+  mask-image: url("../icons/logo-instagram.svg");
 }
 
 .phone {
   @extend .facebook;
-  mask-image: url('../icons/phone-call.svg');
+  mask-image: url("../icons/phone-call.svg");
 }
-

@@ -333,7 +333,13 @@ function show_sku_singl_product_page(){
         <div class="single-product__sku">
             <p><?php echo __('Продуктов код:', 'denifire') ?></p>
             <p>
-                <?php echo $product->get_sku(); ?>
+                <?php
+                    if(get_field('product_code')){
+                        the_field('product_code');
+                    } else {
+                        echo $product->get_sku();
+                    }
+                ?>
             </p>
         </div>
         <?php
@@ -436,7 +442,11 @@ function add_contact_form()
                     </p>
                     <h2>
                         <?php
-                            echo $product->get_sku();
+                            if(get_field('product_code')){
+                                the_field('product_code');
+                            } else {
+                                echo $product->get_sku();
+                            }
                         ?>
                     </h2>
                 </div>

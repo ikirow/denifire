@@ -11,7 +11,7 @@
 
 ?>
 <!doctype html>
-<!-- <html <?php language_attributes(); ?>> -->
+<html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -121,18 +121,29 @@
     }
 
     $title = get_the_title();
-    if(is_archive() || is_home()){
-        if (get_locale() == 'en_GB') {
+    // var_dump(is_shop() || is_product_category());
+    if ((is_archive() || is_home()) && (!is_shop() && !is_product_category())) {
+        if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
             $title = 'News';
         } else {
             $title = 'Новини';
         }
-    } else if (is_search()){
-        if (get_locale() == 'en_GB') {
+    } else if (is_search()) {
+        if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
             $title = 'Search results';
         } else {
             $title = 'Резултати';
         }
+    } else if (is_shop()) {
+        if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
+            $title = 'Shop';
+        } else {
+            $title = 'Магазин';
+        }
+    } else if (is_product_category()) {
+        $queried_obj = get_queried_object();
+        // var_dump($queried_obj);
+        $title = $queried_obj->name;
     }
 
     ?>
@@ -158,5 +169,3 @@
         }
     ?>
     </div>
-
-    

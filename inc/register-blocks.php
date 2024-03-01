@@ -68,6 +68,23 @@ add_action( 'acf/init', function () {
             
         ) );
 
+        // register category list block
+        acf_register_block( array(
+            'name'            => 'category-list', //Slug - also used for template filename
+            'title'           => __( 'Product category list' ),
+            'description'     => __( 'Display product categories' ),
+            'render_callback' => 'denifire_acf_block_render_callback',
+            'category'        => 'denifire-blocks',
+            'icon'            => 'admin-comments', // change icon?
+            'keywords'        => array( 'product', 'category' ), // Used for search 
+            'supports'        => array( 'align' => array( 'full' ), ),
+            'mode'            => 'edit',
+            'align'           => 'true', // Set to 'full' if it needs to be fullwidth
+            // 'enqueue_style' => get_template_directory_uri() . '/template-parts/blocks/css/block-example.css',
+            'enqueue_assets' => wp_enqueue_style( 'block-category-list', get_template_directory_uri() . '/template-parts/blocks/css/block-category-list.css', array(), filemtime(get_template_directory() . '/template-parts/blocks/css/block-category-list.css')),           
+            
+        ) );
+
         acf_register_block( array(
             'name'            => 'text-image-repeater', //Slug - also used for template filename
             'title'           => __( 'Text and image repeater' ),
