@@ -10,17 +10,17 @@
 ?>
 
 <section class="blog-single-header">
-    <div class="main-container single-container-inner-width">
+	<div class="main-container single-container-inner-width">
 
-        <p class="bsh-category m-b-32 category-badge-view clear-margin"><?php echo get_the_category($post)[0]->name?></p>
+		<p class="bsh-category m-b-32 category-badge-view clear-margin"><?php echo get_the_category( $post )[0]->name; ?></p>
 
-        <h1 class="bsh-title has-xxl-font-size narrow-900"><?php the_title();?></h1>
+		<h1 class="bsh-title has-xxl-font-size narrow-900"><?php the_title(); ?></h1>
 
-        <div class="bsh-meta">
-			<?php singleblog_entry_meta_nds( false );  ?>
-        </div>
-        <div class="bsh-social-share">
-			<?php social_share();  ?>
-        </div>
-    </div>
+		<div class="bsh-meta">
+			<?php singleblog_entry_meta_nds( false ); ?>
+		</div>
+		<div class="bsh-social-share">
+			<?php social_share(); ?>
+		</div>
+	</div>
 </section>

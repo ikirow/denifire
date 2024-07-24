@@ -7,6 +7,16 @@
  * @package denifire
  */
 
+if ( ! function_exists( 'write_log' ) ) {
+	function write_log( $log ) {
+		if ( is_array( $log ) || is_object( $log ) ) {
+			error_log( print_r( $log, true ) );
+		} else {
+			error_log( $log );
+		}
+	}
+}
+
 if ( ! function_exists( 'denifire_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -199,8 +209,8 @@ if ( ! function_exists( 'denifire_setup' ) ) :
 		 * Add Image Sizes here
 		 */
 		// add_image_size( 'hero-banner', 1920, 250, array( 'center' , 'center' ), true ); // Wide cropped banner
-		add_image_size( 'blog-iamge', 422, 237 );
-		add_image_size( 'blog-archive-iamge', 355, 237 );
+		add_image_size( 'blog-iamge', 422, 237, true );
+		add_image_size( 'blog-archive-iamge', 355, 237, false );
 		add_image_size( 'categories-list-img', 80, 120, false );
 	}
 endif;
@@ -436,4 +446,259 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 add_filter( 'relevanssi_fuzzy_query', 'rlv_match_inside_words' );
 function rlv_match_inside_words( $query ) {
 	return "(relevanssi.term LIKE '%#term#%') ";
+}
+
+function add_leading_zero_to_all_skus() {
+	global $wpdb;
+
+	// Get all product IDs
+	$product_ids = $wpdb->get_col(
+		"
+        SELECT ID
+        FROM {$wpdb->posts}
+        WHERE post_type = 'product'
+        AND post_status = 'publish'
+    "
+	);
+
+	// Loop through each product ID
+	foreach ( $product_ids as $product_id ) {
+		// Get the SKU
+		$sku = get_post_meta( $product_id, '_sku', true );
+
+		// Check if SKU is not empty and is numeric
+		if ( ! empty( $sku ) && is_numeric( $sku ) ) {
+			// Trim leading zeros
+			$sku = ltrim( $sku, '0' );
+
+			// Add leading zero if necessary
+			$new_sku = '0' . $sku;
+
+			// Update the product SKU if it's changed
+			if ( $new_sku !== $sku ) {
+				update_post_meta( $product_id, '_sku', $new_sku );
+			}
+		}
+	}
+}
+// add_action( 'init', 'add_leading_zero_to_all_skus' );
+
+function my_custom_wp_block_patterns() {
+
+	register_block_pattern(
+		'my-patterns/my-custom-pattern',
+		array(
+			'title'       => __( 'Services page pattern', 'denifire' ),
+
+			'description' => _x( 'Template for new service page', 'Block pattern description', 'denifire' ),
+
+			'content'     => '<!-- wp:kadence/rowlayout {"uniqueID":"9044_ab1bb5-a4","tabletLayout":"row","columnGutter":"none","customGutter":[0,"",""],"colLayout":"equal","maxWidth":1100,"overlayOpacity":0,"align":"full","firstColumnWidth":50,"secondColumnWidth":50,"columnsInnerHeight":true,"padding":["xxl","","xxl",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"background":"#ffffff","borderWidth":["","","",""],"borderRadius":[10,10,10,10],"uniqueID":"9044_069c91-d7","rowGap":[32,"",""],"rowGapVariable":["md","",""],"padding":["xl","xxl","xl","xxl"],"mobilePadding":["sm","xs","sm","xs"],"margin":["","xl","",""],"tabletMargin":["","0","",""],"kbVersion":2,"className":"inner-column-1"} -->
+            <div class="wp-block-kadence-column kadence-column9044_069c91-d7 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"9044_c1da5b-bc","color":"palette3","markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"theme-palette3","tabletAlign":"center","fontSize":[28,"",""],"fontHeight":[1.2,"",""]} -->
+            <h2 class="kt-adv-heading9044_c1da5b-bc wp-block-kadence-advancedheading has-theme-palette-3-color has-text-color" data-kb-block="kb-adv-heading9044_c1da5b-bc">Мобилни Сервизи за Пожарна Техника в Цялата Страна</h2>
+            <!-- /wp:kadence/advancedheading -->
+            
+            <!-- wp:kadence/advancedheading {"uniqueID":"9044_35effc-fc","markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileAlign":"center","htmlTag":"p"} -->
+            <p class="kt-adv-heading9044_35effc-fc wp-block-kadence-advancedheading" data-kb-block="kb-adv-heading9044_35effc-fc">Изпитайте прецизност в пожарната безопасност с нашите мобилни услуги за поддръжка на пожарна техника. Нашият прецизен подход гарантира, че всеки компонент е внимателно проверен. Доверете ни се за щателен процес на поддръжка, за да може вашата пожарогасителна техника да е в оптимално състояние, готова за бърза реакция и надеждна при възникване на пожар.</p>
+            <!-- /wp:kadence/advancedheading -->
+            
+            <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+            <div class="wp-block-buttons"><!-- wp:button {"style":{"color":{"background":"#ffffff","text":"#000000"}},"className":"is-style-red-button"} -->
+            <div class="wp-block-button is-style-red-button"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://www.denifire.com/%d0%b7%d0%b0%d0%bf%d0%b8%d1%82%d0%b2%d0%b0%d0%bd%d0%b5/" style="color:#000000;background-color:#ffffff">НАправи запитване</a></div>
+            <!-- /wp:button --></div>
+            <!-- /wp:buttons --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"9044_ba4f41-08","rowGap":[32,"",""],"rowGapVariable":["custom","",""],"mobilePadding":[0,0,0,0],"mobileMargin":[0,0,0,0],"kbVersion":2,"className":"inner-column-2"} -->
+            <div class="wp-block-kadence-column kadence-column9044_ba4f41-08 inner-column-2"><div class="kt-inside-inner-col"><!-- wp:kadence/image {"align":"center","id":8539,"imgMaxWidth":-35,"sizeSlug":"medium_large","linkDestination":"none","uniqueID":"9044_051049-0b","borderRadius":[10,10,10,10]} -->
+            <div class="wp-block-kadence-image kb-image9044_051049-0b"><figure class="aligncenter size-medium_large"><img src="https://www.denifire.com/wp-content/uploads/2023/09/IMG_6043-768x576.jpg" alt="" class="kb-img wp-image-8539"/></figure></div>
+            <!-- /wp:kadence/image -->
+            
+            <!-- wp:kadence/rowlayout {"uniqueID":"9044_f3d16c-64","customGutter":[32,"",""],"colLayout":"equal","verticalAlignment":"middle","padding":[0,"0","0","0"],"margin":[null,"","",""],"tabletMargin":["xl","","",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_8f682e-10","verticalAlignment":"top","padding":["0","0","0","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_8f682e-10"><div class="kt-inside-inner-col"><!-- wp:kadence/infobox {"uniqueID":"9044_73e6b2-4f","hAlign":"left","hAlignTablet":"center","hAlignMobile":"center","containerBackground":"#ffffff","containerBackgroundOpacity":1,"containerHoverBackgroundOpacity":1,"mediaType":"none","mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fas_check","size":20,"width":2,"title":"","color":"palette1","hoverColor":"palette1","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"palette9","hoverBackground":"palette9","border":"#eeeeee","hoverBorder":"#eeeeee","borderRadius":40,"borderWidth":[0,0,0,0],"padding":[14,14,14,14],"margin":[0,0,0,0]}],"titleFont":[{"level":3,"size":["md","",""],"sizeType":"px","lineHeight":[1.2,"",""],"lineType":"em","letterSpacing":"","textTransform":"","family":"","google":false,"style":"normal","weight":"bold","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["","",""],"sizeType":"px","lineHeight":[1.5,"",""],"lineType":"em","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"textSpacing":[{"padding":["","","",""],"paddingControl":"linked","margin":[0,0,0,0],"marginControl":"individual"}],"learnMoreStyles":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[4,8,4,8],"paddingControl":"individual","margin":[10,0,10,0],"marginControl":"individual","color":"","background":"transparent","border":"#555555","borderRadius":0,"borderWidth":[0,0,0,0],"borderControl":"linked","colorHover":"#ffffff","backgroundHover":"#444444","borderHover":"#444444","hoverEffect":"revealBorder"}],"shadow":[{"color":"#000000","opacity":0.1,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"shadowHover":[{"color":"#000000","opacity":0.1,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"mediaVAlign":"top","mediaAlignMobile":"top","borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"unit":"px"}],"borderHoverStyle":[{"top":["palette9","",""],"right":["palette9","",""],"bottom":["palette9","",""],"left":["palette9","",""],"unit":"px"}],"borderRadius":[10,10,10,10],"kbVersion":2} -->
+            <div class="wp-block-kadence-infobox kt-info-box9044_73e6b2-4f"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-left kb-info-box-vertical-media-align-top kb-info-tablet-halign-center kb-info-mobile-halign-center"><div class="kt-infobox-textcontent"><h3 class="kt-blocks-info-box-title">Поддръжка на Място</h3><p class="kt-blocks-info-box-text">Независимо от местоположението на Вашия обект, нашите мобилни екипи ще дойдат и ще осигурят качествена техническа поддръжка на вашата пожарна техника без да нарушат работния ви процес.</p></div></span></div>
+            <!-- /wp:kadence/infobox --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_555be4-57","verticalAlignment":"top","padding":["0","0","0","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_555be4-57"><div class="kt-inside-inner-col"><!-- wp:kadence/infobox {"uniqueID":"9044_0674f1-2c","hAlign":"left","hAlignTablet":"center","hAlignMobile":"center","containerBackground":"#ffffff","containerBackgroundOpacity":1,"containerHoverBackgroundOpacity":1,"mediaType":"none","mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fas_check","size":20,"width":2,"title":"","color":"palette1","hoverColor":"palette1","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"palette9","hoverBackground":"palette9","border":"#eeeeee","hoverBorder":"#eeeeee","borderRadius":40,"borderWidth":[0,0,0,0],"padding":[14,14,14,14],"margin":[0,0,0,0]}],"titleFont":[{"level":3,"size":["md","",""],"sizeType":"px","lineHeight":[1.2,"",""],"lineType":"em","letterSpacing":"","textTransform":"","family":"","google":false,"style":"normal","weight":"bold","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["","",""],"sizeType":"px","lineHeight":[1.5,"",""],"lineType":"em","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"textSpacing":[{"padding":["","","",""],"paddingControl":"linked","margin":[0,0,0,0],"marginControl":"individual"}],"learnMoreStyles":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[4,8,4,8],"paddingControl":"individual","margin":[10,0,10,0],"marginControl":"individual","color":"","background":"transparent","border":"#555555","borderRadius":0,"borderWidth":[0,0,0,0],"borderControl":"linked","colorHover":"#ffffff","backgroundHover":"#444444","borderHover":"#444444","hoverEffect":"revealBorder"}],"shadow":[{"color":"#000000","opacity":0.1,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"shadowHover":[{"color":"#000000","opacity":0.1,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"mediaVAlign":"top","mediaAlignMobile":"top","borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",0],"unit":"px"}],"borderHoverStyle":[{"top":["palette9","",""],"right":["palette9","",""],"bottom":["palette9","",""],"left":["palette9","",""],"unit":"px"}],"borderRadius":[10,10,10,10],"kbVersion":2} -->
+            <div class="wp-block-kadence-infobox kt-info-box9044_0674f1-2c"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-left kb-info-box-vertical-media-align-top kb-info-tablet-halign-center kb-info-mobile-halign-center"><div class="kt-infobox-textcontent"><h3 class="kt-blocks-info-box-title">Покриваме Цялата Страна</h3><p class="kt-blocks-info-box-text">Без значение дали сте в големия град или в по-малко населено място, ние обслужваме клиенти от цялата страна. Не се притеснявайте да се свържете с нас без значение къде се намира вашия обект.</p></div></span></div>
+            <!-- /wp:kadence/infobox --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout -->
+            
+            <!-- wp:kadence/rowlayout {"uniqueID":"9044_4dc9b2-00","columns":1,"colLayout":"equal","maxWidth":1100,"bgColor":"#ffffff","align":"full","padding":["xxl","","xxl",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_f568f1-65","padding":["0","0","0","0"],"tabletPadding":["","3xl","","3xl"],"mobilePadding":["","0","","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_f568f1-65"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"9044_a63b72-eb","align":"center","color":"palette3","margin":["0","","lg",""],"markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"theme-palette3","fontSize":[28,"",""],"fontHeight":[1.2,"",""],"maxWidth":[800,"",""]} -->
+            <h2 class="kt-adv-heading9044_a63b72-eb wp-block-kadence-advancedheading has-theme-palette-3-color has-text-color" data-kb-block="kb-adv-heading9044_a63b72-eb">Дейности, извършвани от нашите мобилни сервизи</h2>
+            <!-- /wp:kadence/advancedheading -->
+            
+            <!-- wp:kadence/iconlist {"listStyles":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"color":"palette3","textTransform":""}],"listGap":24,"listLabelGap":20,"uniqueID":"9044_579a18-51","iconSize":[20,"",""],"icon":"fas_arrow-right","color":"palette1","background":"palette8","borderRadius":50,"padding":15,"borderWidth":0,"style":"stacked"} -->
+            <div class="wp-block-kadence-iconlist kt-svg-icon-list-items kt-svg-icon-list-items9044_579a18-51 kt-svg-icon-list-columns-1 alignnone"><ul class="kt-svg-icon-list"><!-- wp:kadence/listitem {"uniqueID":"9044_cc9f12-6b","icon":"fas_arrow-right","text":"Годишна техническа поддръжка на пожарогасители - контрол, техническо обслужване","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_cc9f12-6b"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Годишна техническа поддръжка на пожарогасители - контрол, техническо обслужване</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_68785a-61","icon":"fas_arrow-right","text":"Ремонт и презареждане на всички видове преносими и возими (на количка) пожарогасители","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_68785a-61"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Ремонт и презареждане на всички видове преносими и возими (на количка) пожарогасители</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_d6e3a6-e0","icon":"fas_arrow-right","text":"Годишна техническа поддръжка на вътрешни пожарни кранове и шлангови системи","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_d6e3a6-e0"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Годишна техническа поддръжка на вътрешни пожарни кранове и шлангови системи</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_ee3424-75","icon":"fas_arrow-right","text":"Годишна техническа поддръжка на всички видове външни хидранти","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_ee3424-75"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Годишна техническа поддръжка на всички видове външни хидранти</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_060d2a-3d","icon":"fas_arrow-right","text":"Техническо обслужване, профилактика и сервиз на пожароизвестителни системи","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_060d2a-3d"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Техническо обслужване, профилактика и сервиз на пожароизвестителни системи</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_b6af4d-c5","icon":"fas_arrow-right","text":"Техническо обслужване, профилактика и сервиз на пожарогасителни системи","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_b6af4d-c5"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Техническо обслужване, профилактика и сервиз на пожарогасителни системи</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_9073c7-bf","icon":"fas_arrow-right","text":"Техническо обслужване, профилактика и сервиз на евакуационно и аварийно осветление","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_9073c7-bf"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Техническо обслужване, профилактика и сервиз на евакуационно и аварийно осветление</span></li>
+            <!-- /wp:kadence/listitem -->
+            
+            <!-- wp:kadence/listitem {"uniqueID":"9044_ee2b4d-e1","icon":"fas_arrow-right","text":"Поддръжка и профилактика на системи за отвеждане на дим и топлина","color":"#ff0000"} -->
+            <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-9044_ee2b4d-e1"><span data-name="fas_arrow-right" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text">Поддръжка и профилактика на системи за отвеждане на дим и топлина</span></li>
+            <!-- /wp:kadence/listitem --></ul></div>
+            <!-- /wp:kadence/iconlist --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout -->
+            
+            <!-- wp:kadence/rowlayout {"uniqueID":"9044_c62bb8-45","columns":1,"colLayout":"equal","maxWidth":1100,"align":"full","padding":["xxl","","xxl",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_f80063-2e","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_f80063-2e"><div class="kt-inside-inner-col"><!-- wp:kadence/rowlayout {"uniqueID":"9044_2f5891-e0","colLayout":"left-golden","padding":["0","0","0","0"],"margin":["","","sm",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_600ebe-a2","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_600ebe-a2"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"9044_16cdd1-30","color":"palette3","margin":["0","","md",""],"markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"theme-palette3","fontSize":["lg","",""],"fontHeight":[1.2,"",""]} -->
+            <h2 class="kt-adv-heading9044_16cdd1-30 wp-block-kadence-advancedheading has-theme-palette-3-color has-text-color" data-kb-block="kb-adv-heading9044_16cdd1-30">Мобилни Сервизни Екипи</h2>
+            <!-- /wp:kadence/advancedheading -->
+            
+            <!-- wp:kadence/advancedheading {"uniqueID":"9044_39a87e-dd","color":"palette3","markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"theme-palette3","htmlTag":"p"} -->
+            <p class="kt-adv-heading9044_39a87e-dd wp-block-kadence-advancedheading has-theme-palette-3-color has-text-color" data-kb-block="kb-adv-heading9044_39a87e-dd">Представяме ви нашите мобилни сервизни екипи, това е нашето специализирано звено, предназначено за ефективна поддръжка на пожарогасители във всяка една точка на страната. Нашите мобилни сервизи за пожарогасители са оборудвани с най-съвременни инструменти и в комбинация с квалифицирания ни екип осигуряваме обслужване , проверка и презареждане, гарантирайки надеждността на Вашето противопожарно оборудване. Бъдете подготвени и сигурни с нашите всеобхватни услуги.</p>
+            <!-- /wp:kadence/advancedheading --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"9044_b96652-40","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_b96652-40"><div class="kt-inside-inner-col"><!-- wp:kadence/image {"align":"center","id":3730,"imgMaxWidth":200,"linkDestination":"none","uniqueID":"9044_dedbe6-7f"} -->
+            <div class="wp-block-kadence-image kb-image9044_dedbe6-7f"><figure class="aligncenter image-is-svg"><img src="https://www.denifire.com/wp-content/uploads/2021/01/Group-36.svg" alt="" class="kb-img wp-image-3730"/></figure></div>
+            <!-- /wp:kadence/image -->
+            
+            <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+            <div class="wp-block-buttons"><!-- wp:button {"style":{"color":{"background":"#ffffff","text":"#000000"}},"className":"is-style-red-button"} -->
+            <div class="wp-block-button is-style-red-button"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://www.denifire.com/%d0%b7%d0%b0%d0%bf%d0%b8%d1%82%d0%b2%d0%b0%d0%bd%d0%b5/" style="color:#000000;background-color:#ffffff">Направи запитване</a></div>
+            <!-- /wp:button --></div>
+            <!-- /wp:buttons --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout -->
+            
+            <!-- wp:kadence/rowlayout {"uniqueID":"9044_48f3ac-b8","columns":3,"tabletLayout":"row","colLayout":"equal","padding":["0","0","0","0"],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_195c20-dc","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_195c20-dc"><div class="kt-inside-inner-col"><!-- wp:kadence/infobox {"uniqueID":"9044_333cd9-06","hAlign":"left","hAlignTablet":"center","hAlignMobile":"center","containerBackground":"#ffffff","containerHoverBackground":"palette9","containerPadding":["lg","lg","lg","lg"],"mediaType":"number","mediaIcon":[{"icon":"fe_aperture","size":130,"width":2,"title":"","color":"palette8","hoverColor":"","hoverAnimation":"none","flipIcon":"","tabletSize":"","mobileSize":""}],"mediaStyle":[{"background":"","hoverBackground":"","border":"","hoverBorder":"","borderRadius":0,"borderWidth":[0,0,0,0],"padding":[0,0,8,0],"margin":[-32,15,0,15]}],"titleFont":[{"level":3,"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"paddingControl":"linked","margin":[-96,0,32,0],"marginControl":"individual"}],"learnMoreStyles":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,"",0],"paddingControl":"individual","margin":[32,0,0,0],"marginControl":"individual","color":"palette1","background":"transparent","border":"","borderRadius":0,"borderWidth":[0,0,0,0],"borderControl":"linked","colorHover":"palette2","backgroundHover":"","borderHover":"","hoverEffect":"revealBorder","paddingTablet":["","","",""],"paddingMobile":["","","",""],"paddingType":"px","textTransform":""}],"mediaNumber":[{"family":"","google":false,"hoverAnimation":"none","style":"","weight":"700","variant":"","subset":"","loadGoogle":true}],"borderStyle":[{"top":["palette7","",1],"right":["palette7","",1],"bottom":["palette7","",1],"left":["palette7","",1],"unit":"px"}],"borderRadius":[10,10,10,10],"kbVersion":2} -->
+            <div class="wp-block-kadence-infobox kt-info-box9044_333cd9-06"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-left kb-info-tablet-halign-center kb-info-mobile-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-number-container kt-info-number-animate-none"><div class="kadence-info-box-number-inner-container"><div class="kt-blocks-info-box-number">01</div></div></div></div></div><div class="kt-infobox-textcontent"><h3 class="kt-blocks-info-box-title">Спестени Разходи</h3><p class="kt-blocks-info-box-text">Спестяваме ненужни разходи за транспортиране на оборудването до стационарната ни сервизна база</p></div></span></div>
+            <!-- /wp:kadence/infobox --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_0358a9-0f","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_0358a9-0f"><div class="kt-inside-inner-col"><!-- wp:kadence/infobox {"uniqueID":"9044_47e315-a8","hAlign":"left","hAlignTablet":"center","hAlignMobile":"center","containerBackground":"palette9","containerHoverBackground":"palette9","containerPadding":["lg","lg","lg","lg"],"mediaType":"number","mediaIcon":[{"icon":"fe_aperture","size":130,"width":2,"title":"","color":"palette8","hoverColor":"","hoverAnimation":"none","flipIcon":"","tabletSize":"","mobileSize":""}],"mediaStyle":[{"background":"","hoverBackground":"","border":"","hoverBorder":"","borderRadius":0,"borderWidth":[0,0,0,0],"padding":[0,0,8,0],"margin":[-32,15,0,15]}],"titleFont":[{"level":3,"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"paddingControl":"linked","margin":[-96,0,32,0],"marginControl":"individual"}],"learnMoreStyles":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,"",0],"paddingControl":"individual","margin":[32,0,0,0],"marginControl":"individual","color":"palette1","background":"transparent","border":"","borderRadius":0,"borderWidth":[0,0,0,0],"borderControl":"linked","colorHover":"palette2","backgroundHover":"","borderHover":"","hoverEffect":"revealBorder","paddingTablet":["","","",""],"paddingMobile":["","","",""],"paddingType":"px","textTransform":""}],"mediaNumber":[{"family":"","google":false,"hoverAnimation":"none","style":"","weight":"700","variant":"","subset":"","loadGoogle":true}],"borderStyle":[{"top":["palette7","",1],"right":["palette7","",1],"bottom":["palette7","",1],"left":["palette7","",1],"unit":"px"}],"borderRadius":[10,10,10,10],"kbVersion":2} -->
+            <div class="wp-block-kadence-infobox kt-info-box9044_47e315-a8"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-left kb-info-tablet-halign-center kb-info-mobile-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-number-container kt-info-number-animate-none"><div class="kadence-info-box-number-inner-container"><div class="kt-blocks-info-box-number">02</div></div></div></div></div><div class="kt-infobox-textcontent"><h3 class="kt-blocks-info-box-title">Непрекъсната Сигурност</h3><p class="kt-blocks-info-box-text">Не оставяме обекта без налични пожарогасителни средства по времето на годишната им профилактика</p></div></span></div>
+            <!-- /wp:kadence/infobox --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_c537b9-58","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_c537b9-58"><div class="kt-inside-inner-col"><!-- wp:kadence/infobox {"uniqueID":"9044_f2f41a-b7","hAlign":"left","hAlignTablet":"center","hAlignMobile":"center","containerBackground":"palette9","containerHoverBackground":"palette9","containerPadding":["lg","lg","lg","lg"],"mediaType":"number","mediaIcon":[{"icon":"fe_aperture","size":130,"width":2,"title":"","color":"palette8","hoverColor":"","hoverAnimation":"none","flipIcon":"","tabletSize":"","mobileSize":""}],"mediaStyle":[{"background":"","hoverBackground":"","border":"","hoverBorder":"","borderRadius":0,"borderWidth":[0,0,0,0],"padding":[0,0,8,0],"margin":[-32,15,0,15]}],"titleFont":[{"level":3,"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"paddingControl":"linked","margin":[-96,0,32,0],"marginControl":"individual"}],"learnMoreStyles":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,"",0],"paddingControl":"individual","margin":[32,0,0,0],"marginControl":"individual","color":"palette1","background":"transparent","border":"","borderRadius":0,"borderWidth":[0,0,0,0],"borderControl":"linked","colorHover":"palette2","backgroundHover":"","borderHover":"","hoverEffect":"revealBorder","paddingTablet":["","","",""],"paddingMobile":["","","",""],"paddingType":"px","textTransform":""}],"mediaNumber":[{"family":"","google":false,"hoverAnimation":"none","style":"","weight":"700","variant":"","subset":"","loadGoogle":true}],"borderStyle":[{"top":["palette7","",1],"right":["palette7","",1],"bottom":["palette7","",1],"left":["palette7","",1],"unit":"px"}],"borderRadius":[10,10,10,10],"kbVersion":2} -->
+            <div class="wp-block-kadence-infobox kt-info-box9044_f2f41a-b7"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-left kb-info-tablet-halign-center kb-info-mobile-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-number-container kt-info-number-animate-none"><div class="kadence-info-box-number-inner-container"><div class="kt-blocks-info-box-number">03</div></div></div></div></div><div class="kt-infobox-textcontent"><h3 class="kt-blocks-info-box-title">Мониторинг на Процеса</h3><p class="kt-blocks-info-box-text">Позволяваме да извършите мониторинг на нашата дейност, за да се убедите сами в професионалния ни подход</p></div></span></div>
+            <!-- /wp:kadence/infobox --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout -->
+            
+            <!-- wp:kadence/rowlayout {"uniqueID":"9044_850f76-27","tabletLayout":"row","collapseGutter":"wider","customRowGutter":[60,"",""],"colLayout":"right-golden","maxWidth":1100,"bgColor":"#ffffff","overlayOpacity":0,"align":"full","padding":["xxl","","xxl",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_8343eb-f6","rowGap":[32,"",""],"rowGapVariable":["md","",""],"padding":["","xs","",""],"tabletPadding":["","0","",""],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_8343eb-f6"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"9044_b7a503-e8","color":"","margin":["0","","xs",""],"markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"","tabletAlign":"center","fontSize":["lg","",""],"fontHeight":[1.2,"",""]} -->
+            <h2 class="kt-adv-heading9044_b7a503-e8 wp-block-kadence-advancedheading" data-kb-block="kb-adv-heading9044_b7a503-e8">Открит Процес</h2>
+            <!-- /wp:kadence/advancedheading -->
+            
+            <!-- wp:kadence/advancedheading {"uniqueID":"9044_a02f3e-c5","color":"","markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"tabletMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"mobileMarkBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"","tabletAlign":"center","htmlTag":"p"} -->
+            <p class="kt-adv-heading9044_a02f3e-c5 wp-block-kadence-advancedheading" data-kb-block="kb-adv-heading9044_a02f3e-c5">Нашият ангажимент към качеството и детайла ни правят предпочитан избор на мнозина за поддържането на тяхната пожарна безопасност. Нашите специалисти следват строги процедури, за да гарантират, че всеки пожарогасител е в оптимално състояние и готов да функционира, когато е най-необходим.</p>
+            <!-- /wp:kadence/advancedheading -->
+            
+            <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+            <div class="wp-block-buttons"><!-- wp:button {"style":{"color":{"background":"#ffffff","text":"#000000"}},"className":"is-style-red-button"} -->
+            <div class="wp-block-button is-style-red-button"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://www.denifire.com/%d0%b7%d0%b0%d0%bf%d0%b8%d1%82%d0%b2%d0%b0%d0%bd%d0%b5/" style="color:#000000;background-color:#ffffff">Направи Запитване</a></div>
+            <!-- /wp:button --></div>
+            <!-- /wp:buttons --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"9044_d255bb-2b","kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_d255bb-2b"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedgallery {"uniqueID":"9044_bda7c2-35","columns":[2,2,2,2,1,1],"ids":[8541,9065,9067,9069],"type":"grid","gutter":[1,"",""],"gutterUnit":"rem","imagesDynamic":[{"id":8541,"link":"https://www.denifire.com/?attachment_id=8541","alt":"","url":"https://www.denifire.com/wp-content/uploads/2023/09/IMG_6044.jpg","customLink":"","linkTarget":"","linkSponsored":"","thumbUrl":"https://www.denifire.com/wp-content/uploads/2023/09/IMG_6044-1024x768.jpg","lightUrl":"https://www.denifire.com/wp-content/uploads/2023/09/IMG_6044.jpg","width":1024,"height":768},{"id":9065,"link":"https://www.denifire.com/?attachment_id=9065","alt":"","caption":{"raw":"","rendered":""},"url":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5745-scaled.jpg","customLink":"","linkTarget":"","linkSponsored":"","thumbUrl":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5745-1024x683.jpg","lightUrl":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5745-scaled.jpg","width":1024,"height":683},{"id":9067,"link":"https://www.denifire.com/?attachment_id=9067","alt":"","caption":{"raw":"","rendered":""},"url":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5761-scaled.jpg","customLink":"","linkTarget":"","linkSponsored":"","thumbUrl":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5761-1024x683.jpg","lightUrl":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5761-scaled.jpg","width":1024,"height":683},{"id":9069,"link":"https://www.denifire.com/?attachment_id=9069","alt":"","caption":{"raw":"","rendered":""},"url":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5794-scaled.jpg","customLink":"","linkTarget":"","linkSponsored":"","thumbUrl":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5794-1024x683.jpg","lightUrl":"https://www.denifire.com/wp-content/uploads/2024/03/IMG_5794-scaled.jpg","width":1024,"height":683}],"kbVersion":2} /--></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout -->
+            
+            <!-- wp:kadence/rowlayout {"uniqueID":"9044_0c2928-eb","columns":1,"colLayout":"equal","maxWidth":1100,"align":"full","padding":["xxl","","xxl",""],"kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_d2fd28-48","padding":["","5xl","","5xl"],"mobilePadding":["","0","","0"],"kbVersion":2,"className":"inner-column-1"} -->
+            <div class="wp-block-kadence-column kadence-column9044_d2fd28-48 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"9044_1d96a0-29","align":"center","color":"","margin":["0","","sm",""],"markBorder":"","markBorderStyles":[{"top":[null,"",""],"right":[null,"",""],"bottom":[null,"",""],"left":[null,"",""],"unit":"px"}],"colorClass":"","fontSize":["lg","",""],"fontHeight":[1.2,"",""],"maxWidth":[null,"",""]} -->
+            <h2 class="kt-adv-heading9044_1d96a0-29 wp-block-kadence-advancedheading" data-kb-block="kb-adv-heading9044_1d96a0-29">Отзиви от Клиенти</h2>
+            <!-- /wp:kadence/advancedheading --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"9044_601354-c7","textColor":"palette3","linkColor":"palette1","linkHoverColor":"palette2","kbVersion":2,"className":"inner-column-1"} -->
+            <div class="wp-block-kadence-column kadence-column9044_601354-c7 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/rowlayout {"uniqueID":"9044_6e7b28-fe","columns":4,"tabletLayout":"row","colLayout":"two-grid","kbVersion":2} -->
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"borderRadius":[16,16,16,16],"uniqueID":"9044_e7f4c0-c7","textAlign":["","center",""],"direction":["vertical","horizontal",""],"justifyContent":["","center",""],"padding":["0","0","0","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_e7f4c0-c7 kb-section-dir-vertical kb-section-md-dir-horizontal"><div class="kt-inside-inner-col"><!-- wp:kadence/testimonials {"uniqueID":"9044_3f349a-0c","hAlign":"left","containerMaxWidth":800,"containerBackground":"palette9","responsiveContainerBorderRadius":[5,5,5,5],"containerPadding":["lg","lg","lg","lg"],"mediaStyles":[{"width":50,"backgroundSize":"cover","background":"","backgroundOpacity":1,"border":"","borderRadius":"","borderWidth":["","","",""],"padding":["","","",""],"margin":["","","",""],"ratio":""}],"mediaBorderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"displayTitle":false,"titleFont":[{"color":"","level":2,"size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"margin":["","","",""]}],"contentFont":[{"color":"palette3","size":[20,"",""],"sizetype":"px","lineHeight":[null,"",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"lineType":""}],"nameFont":[{"color":"palette1","size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"uppercase","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"occupationFont":[{"color":"palette6","size":["sm","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"ratingStyles":[{"color":"#ffd700","size":16,"margin":["","","",""],"iconSpacing":"","icon":"fas_star","stroke":2}],"displayShadow":true,"shadow":[{"color":"#000000","opacity":0.05,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"kbVersion":2} -->
+            <!-- wp:kadence/testimonial {"uniqueID":"9044_42b28c-a5","content":"Страхотно обслужване. Силно препоръчвам.","name":"Венци М.","occupation":"Клиент"} /-->
+            <!-- /wp:kadence/testimonials --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"borderRadius":[16,16,16,16],"uniqueID":"9044_1f6ff4-e4","textAlign":["","center",""],"direction":["vertical","horizontal",""],"justifyContent":["","center",""],"padding":["0","0","0","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_1f6ff4-e4 kb-section-dir-vertical kb-section-md-dir-horizontal"><div class="kt-inside-inner-col"><!-- wp:kadence/testimonials {"uniqueID":"9044_b0cef2-ce","hAlign":"left","containerMaxWidth":800,"containerBackground":"palette9","responsiveContainerBorderRadius":[5,5,5,5],"containerPadding":["lg","lg","lg","lg"],"mediaStyles":[{"width":50,"backgroundSize":"cover","background":"","backgroundOpacity":1,"border":"","borderRadius":"","borderWidth":["","","",""],"padding":["","","",""],"margin":["","","",""],"ratio":""}],"mediaBorderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"displayTitle":false,"titleFont":[{"color":"","level":2,"size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"margin":["","","",""]}],"contentFont":[{"color":"palette3","size":[20,"",""],"sizetype":"px","lineHeight":[null,"",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"lineType":""}],"nameFont":[{"color":"palette1","size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"uppercase","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"occupationFont":[{"color":"palette6","size":["sm","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"ratingStyles":[{"color":"#ffd700","size":16,"margin":["","","",""],"iconSpacing":"","icon":"fas_star","stroke":2}],"displayShadow":true,"shadow":[{"color":"#000000","opacity":0.05,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"kbVersion":2} -->
+            <!-- wp:kadence/testimonial {"uniqueID":"9044_4b50f6-21","content":"Много любезни и коректни. Силно препоръчвам.","name":"ВЛАДИМИР М.","occupation":"Клиент"} /-->
+            <!-- /wp:kadence/testimonials --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"borderRadius":[16,16,16,16],"uniqueID":"9044_c1392d-37","textAlign":["","center",""],"direction":["vertical","horizontal",""],"justifyContent":["","center",""],"padding":["0","0","0","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_c1392d-37 kb-section-dir-vertical kb-section-md-dir-horizontal"><div class="kt-inside-inner-col"><!-- wp:kadence/testimonials {"uniqueID":"9044_b9dbf4-1e","hAlign":"left","containerMaxWidth":800,"containerBackground":"palette9","responsiveContainerBorderRadius":[5,5,5,5],"containerPadding":["lg","lg","lg","lg"],"mediaStyles":[{"width":50,"backgroundSize":"cover","background":"","backgroundOpacity":1,"border":"","borderRadius":"","borderWidth":["","","",""],"padding":["","","",""],"margin":["","","",""],"ratio":""}],"mediaBorderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"displayTitle":false,"titleFont":[{"color":"","level":2,"size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"margin":["","","",""]}],"contentFont":[{"color":"palette3","size":[20,"",""],"sizetype":"px","lineHeight":[null,"",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"lineType":""}],"nameFont":[{"color":"palette1","size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"uppercase","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"occupationFont":[{"color":"palette6","size":["sm","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"ratingStyles":[{"color":"#ffd700","size":16,"margin":["","","",""],"iconSpacing":"","icon":"fas_star","stroke":2}],"displayShadow":true,"shadow":[{"color":"#000000","opacity":0.05,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"kbVersion":2} -->
+            <!-- wp:kadence/testimonial {"uniqueID":"9044_1216c1-c9","content":"Изключително коректно обслужване, и на високо ниво.","name":"Дарена К.","occupation":"Клиент"} /-->
+            <!-- /wp:kadence/testimonials --></div></div>
+            <!-- /wp:kadence/column -->
+            
+            <!-- wp:kadence/column {"borderWidth":["","","",""],"borderRadius":[16,16,16,16],"uniqueID":"9044_1c5629-54","textAlign":["","center",""],"direction":["vertical","horizontal",""],"justifyContent":["","center",""],"padding":["0","0","0","0"],"kbVersion":2} -->
+            <div class="wp-block-kadence-column kadence-column9044_1c5629-54 kb-section-dir-vertical kb-section-md-dir-horizontal"><div class="kt-inside-inner-col"><!-- wp:kadence/testimonials {"uniqueID":"9044_eea4fb-27","hAlign":"left","containerMaxWidth":800,"containerBackground":"palette9","responsiveContainerBorderRadius":[5,5,5,5],"containerPadding":["lg","lg","lg","lg"],"mediaStyles":[{"width":50,"backgroundSize":"cover","background":"","backgroundOpacity":1,"border":"","borderRadius":"","borderWidth":["","","",""],"padding":["","","",""],"margin":["","","",""],"ratio":""}],"mediaBorderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"displayTitle":false,"titleFont":[{"color":"","level":2,"size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":["","","",""],"margin":["","","",""]}],"contentFont":[{"color":"palette3","size":[20,"",""],"sizetype":"px","lineHeight":[null,"",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"lineType":""}],"nameFont":[{"color":"palette1","size":["","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"uppercase","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"occupationFont":[{"color":"palette6","size":["sm","",""],"sizetype":"px","lineHeight":["","",""],"linetype":"px","letterSpacing":"","textTransform":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true}],"ratingStyles":[{"color":"#ffd700","size":16,"margin":["","","",""],"iconSpacing":"","icon":"fas_star","stroke":2}],"displayShadow":true,"shadow":[{"color":"#000000","opacity":0.05,"spread":-10,"blur":80,"hOffset":0,"vOffset":0}],"kbVersion":2} -->
+            <!-- wp:kadence/testimonial {"uniqueID":"9044_25c514-f5","content":"Работят бързо и безупречно.","name":"ПЛАМЕН А.","occupation":"Клиент"} /-->
+            <!-- /wp:kadence/testimonials --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout --></div></div>
+            <!-- /wp:kadence/column -->
+            <!-- /wp:kadence/rowlayout -->',
+
+			'categories'  => array( 'denifire' ),
+		)
+	);
+}
+add_action( 'init', 'my_custom_wp_block_patterns' );
+
+
+/**
+ * Add a new options page named "Denifire Options".
+ */
+if ( function_exists( 'acf_add_options_page' ) ) {
+
+	acf_add_options_page(
+		array(
+			'page_title' => 'Denifire Options',
+			'menu_title' => 'Denifire Options',
+			'menu_slug'  => 'denifire_options',
+			'capability' => 'edit_posts',
+			'redirect'   => false,
+		)
+	);
+
+
 }

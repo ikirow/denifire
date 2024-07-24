@@ -13,159 +13,205 @@
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-    <?php wp_head(); ?>
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-    <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'denifire' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'denifire' ); ?></a>
 
-    <header id="masthead" class="site-header">
-        <div class="row space-between">
-            <div class="site-branding">
-                <?php
-                if ( has_custom_logo() ) {
-                    the_custom_logo();
-                } else {
-                    echo '<a href="' . esc_url( home_url( '/' ) ) . '" class="logo-text" rel="home">';
-                    // Get the site name and cut the words
-                    $site_name = get_bloginfo( 'name' );
-                    $new_site_name = explode( " ", $site_name );
+	<header id="masthead" class="site-header">
+		<div class="row space-between">
+			<div class="site-branding">
+				<?php
+				if ( has_custom_logo() ) {
+					the_custom_logo();
+				} else {
+					echo '<a href="' . esc_url( home_url( '/' ) ) . '" class="logo-text" rel="home">';
+					// Get the site name and cut the words
+					$site_name     = get_bloginfo( 'name' );
+					$new_site_name = explode( ' ', $site_name );
 
-                    if ( $new_site_name ) {
-                        echo $new_site_name[0];
-                        $total_words = count( $new_site_name );
-                        if ( $total_words > 1 ) {
-                            $i = 1;
-                            while( $i < $total_words ) {
-                                echo '<span class="green">' . $new_site_name[$i] . '</span>';
-                                $i++;
-                            }
-                        }
-                    }
-                    echo '</a>';
-                }
+					if ( $new_site_name ) {
+						echo $new_site_name[0];
+						$total_words = count( $new_site_name );
+						if ( $total_words > 1 ) {
+							$i = 1;
+							while ( $i < $total_words ) {
+								echo '<span class="green">' . $new_site_name[ $i ] . '</span>';
+								++$i;
+							}
+						}
+					}
+					echo '</a>';
+				}
 
-                $denifire_description = get_bloginfo( 'description', 'display' );
-                if ( $denifire_description || is_customize_preview() ) {
-                    // echo $denifire_description; /* WPCS: xss ok. */
-                }
-                ?>
+				$denifire_description = get_bloginfo( 'description', 'display' );
+				if ( $denifire_description || is_customize_preview() ) {
+					// echo $denifire_description; /* WPCS: xss ok. */
+				}
+				?>
 
-            </div><!-- .site-branding -->
-            
-            <nav id="site-navigation" class="main-navigation">
-           
-                <div class="hamburger menu-toggle" aria-controls="primary-menu"
-                        aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <?php
-                // Just echo the main menu
-                if ( has_nav_menu( 'menu-1' ) ) {
+			</div><!-- .site-branding -->
+			
+			<nav id="site-navigation" class="main-navigation">
+			
+				<div class="hamburger menu-toggle" aria-controls="primary-menu"
+						aria-expanded="false">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<?php
+				// Just echo the main menu
+				if ( has_nav_menu( 'menu-1' ) ) {
 
-                    wp_nav_menu( array(
-                        'theme_location' => 'menu-1',
-                        'container'      => false,
-                        'items_wrap'     => '<ul id="%1$s" class="%2$s" data-responsive-menu="drilldown">%3$s</ul>',
-                        'menu_class'     => 'megamenu-wrapper',
-                        'menu_id'        => 'primary-menu',
-                    ) );
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu-1',
+							'container'      => false,
+							'items_wrap'     => '<ul id="%1$s" class="%2$s" data-responsive-menu="drilldown">%3$s</ul>',
+							'menu_class'     => 'megamenu-wrapper',
+							'menu_id'        => 'primary-menu',
+						)
+					);
 
-                }
+				}
 
-                ?>
-            </nav><!-- #site-navigation -->
-        </div>
-    </header><!-- #masthead -->
+				?>
+			</nav><!-- #site-navigation -->
+		</div>
+	</header><!-- #masthead -->
 
-    <style>
-        <?php
-        $hero_override = get_field( 'hero_background_override' );
-        if($hero_override){?>
-            .hero_section{
-                background-image: url(<?php echo $hero_override; ?>)!important;
-            }
-        <?php } ?>
-        <?php
-        $mobile_hero_override = get_field( 'mobile_background_override' );
-        if($mobile_hero_override){?>
-            @media(max-width: 480px) {
-                .hero_section {
-                    background-image: url(<?php echo $mobile_hero_override; ?>)!important;
-                }
-            }
-        <?php } ?>
-    </style>
-    <?php
+	<style>
+		<?php
+		$hero_override = get_field( 'hero_background_override' );
+		if ( $hero_override ) {
+			?>
+			.hero_section{
+				background-image: url(<?php echo $hero_override; ?>)!important;
+			}
+		<?php } ?>
+		<?php
+		$mobile_hero_override = get_field( 'mobile_background_override' );
+		if ( $mobile_hero_override ) {
+			?>
+			@media(max-width: 480px) {
+				.hero_section {
+					background-image: url(<?php echo $mobile_hero_override; ?>)!important;
+				}
+			}
+		<?php } ?>
 
-    $show_hero = false;
-    if(is_archive() || is_singular('product')|| is_home() || is_search()){
-        $show_hero = true;
-    }elseif ((is_page() || is_single()) && !(get_field( 'show_hero' ) === false)){
-        $show_hero = true;
-    }
+		
+			<?php
+			$product_hero_image = get_field( 'product_hero_image', 'option' );
+			if ( $product_hero_image ) {
+				?>
+				.product-template-default .hero_section{
+					background-image: url(<?php echo $product_hero_image; ?>)!important;
+				}
+			<?php } ?>
+			<?php
+			$product_hero_image_copy = get_field( 'product_hero_image_copy', 'option' );
+			if ( $product_hero_image_copy ) {
+				?>
+				@media(max-width: 480px) {
+					.product-template-default .hero_section {
+						background-image: url(<?php echo $product_hero_image_copy; ?>)!important;
+					}
+				}
+			<?php } ?>
+	</style>
+	<?php
 
-    $show_title = false;
-    if((is_page() || is_singular('post')) || is_search() && !(get_field( 'show_hero' ) === false)){
-        $show_title = true;
-    }else if(is_archive() || is_home()){
-        $show_title = true;
-    }
+	$show_hero = false;
+	if ( is_archive() || is_singular( 'product' ) || is_home() || is_search() ) {
+		$show_hero = true;
+	} elseif ( ( is_page() || is_single() ) && ! ( get_field( 'show_hero' ) === false ) ) {
+		$show_hero = true;
+	}
 
-    $title = get_the_title();
-    // var_dump(is_shop() || is_product_category());
-    if ((is_archive() || is_home()) && (!is_shop() && !is_product_category())) {
-        if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
-            $title = 'News';
-        } else {
-            $title = 'Новини';
-        }
-    } else if (is_search()) {
-        if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
-            $title = 'Search results';
-        } else {
-            $title = 'Резултати';
-        }
-    } else if (is_shop()) {
-        if (get_locale() == 'en_GB' || get_locale() == 'en_US') {
-            $title = 'Shop';
-        } else {
-            $title = 'Магазин';
-        }
-    } else if (is_product_category()) {
-        $queried_obj = get_queried_object();
-        // var_dump($queried_obj);
-        $title = $queried_obj->name;
-    }
+	$show_title = false;
+	if ( ( is_page() || is_singular( 'post' ) ) || is_search() && ! ( get_field( 'show_hero' ) === false ) ) {
+		$show_title = true;
+	} elseif ( is_archive() || is_home() ) {
+		$show_title = true;
+	}
 
-    ?>
+	$title = get_the_title();
+	// var_dump(is_shop() || is_product_category());
+	if ( ( is_archive() || is_home() ) && ( ! is_shop() && ! is_product_category() ) ) {
+		if ( get_locale() == 'en_GB' || get_locale() == 'en_US' ) {
+			$title = 'News';
+		} else {
+			$title = 'Новини';
+		}
+	} elseif ( is_search() ) {
+		if ( get_locale() == 'en_GB' || get_locale() == 'en_US' ) {
+			$title = 'Search results';
+		} else {
+			$title = 'Резултати';
+		}
+	} elseif ( is_shop() ) {
+		if ( get_locale() == 'en_GB' || get_locale() == 'en_US' ) {
+			$title = 'Shop';
+		} else {
+			$title = 'Магазин';
+		}
+	} elseif ( is_product_category() ) {
+		$queried_obj = get_queried_object();
+		// var_dump($queried_obj);
+		$title = $queried_obj->name;
+	}
 
-    <?php if(!is_front_page() && !is_single()){
-        if($show_hero){
-        ?>
-        <div class="hero_section <?php if($show_title){ echo 'with-title';}?>">
-            <?php if($show_title){ ?>
-                <h1><?php echo __($title , 'denifire');?></h1>
-                
-            <?php } ?>
-        </div>
-        <?php } ?>
-    <?php } ?>
+	?>
 
-    <div id="content" class="site-content <?php if((get_field( 'show_hero' ) === false) || is_front_page()){echo 'no-hero';}?>">
+	<?php
+	if ( ! is_front_page() && ! is_single() ) {
+		if ( $show_hero ) {
+			?>
+		<div class="hero_section 
+			<?php
+			if ( $show_title ) {
+				echo 'with-title';}
+			?>
+		">
+			<?php if ( $show_title ) { ?>
+				<h1><?php echo __( $title, 'denifire' ); ?></h1>
+				
+			<?php } ?>
+		</div>
+		<?php } ?>
+		<?php
+	}
+	if ( is_singular( 'product' ) ) {
+		if ( $show_hero ) {
+			?>
+				<div class="hero_section">
 
-    <div class="container">
-    <?php
-        if(is_product_category() || is_shop() || is_search() || is_product()) {
-            echo  do_shortcode('[searchform]');
-        }
-    ?>
-    </div>
+				</div>
+			<?php
+		}
+	}
+	?>
+
+	<div id="content" class="site-content 
+	<?php
+	if ( ( get_field( 'show_hero' ) === false ) || is_front_page() ) {
+		echo 'no-hero';}
+	?>
+	">
+
+	<div class="container">
+	<?php
+	if ( is_product_category() || is_shop() || is_search() || is_product() ) {
+		echo do_shortcode( '[searchform]' );
+	}
+	?>
+	</div>

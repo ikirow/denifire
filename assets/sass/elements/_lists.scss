@@ -1,9 +1,10 @@
-ul, ol {
+ul,
+ol {
   margin: 0;
 }
 
 ul {
-  list-style: none outside none;
+  //   list-style: none outside none;
 }
 
 ol {
@@ -13,7 +14,7 @@ ol {
 li > ul,
 li > ol {
   margin-bottom: 0;
-  margin-left: .5em;
+  margin-left: 0.5em;
 }
 
 dt {

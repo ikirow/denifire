@@ -84,6 +84,7 @@
     padding: rem(85) 0 rem(35);
     @include bp(laptopxs) {
       padding: rem(105) 0 rem(35);
+      min-height: 20rem;
     }
   }
   h1 {

@@ -1,8 +1,6 @@
-
-
 <?php
 /**
- * Block template file: 
+ * Block template file:
  *
  * All Block Template.
  *
@@ -14,39 +12,47 @@
 
 // Create id attribute allowing for custom "anchor" value.
 $id = 'all-' . $block['id'];
-if (! empty($block['anchor']) ) {
-    $id = $block['anchor'];
+if ( ! empty( $block['anchor'] ) ) {
+	$id = $block['anchor'];
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
 $classes = 'block-image-link-repeater';
-if (! empty($block['className']) ) {
-    $classes .= ' ' . $block['className'];
+if ( ! empty( $block['className'] ) ) {
+	$classes .= ' ' . $block['className'];
 }
-if (! empty($block['align']) ) {
-    $classes .= ' align' . $block['align'];
+if ( ! empty( $block['align'] ) ) {
+	$classes .= ' align' . $block['align'];
 }
 ?>
 
-<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($classes); ?>">
-    <?php if (have_rows('image-link-repeater') ) : ?>
-        <?php while ( have_rows('image-link-repeater') ) : the_row(); ?>
-            <?php $image = get_sub_field('image'); ?>
-            <?php $size = 'full'; ?>
-            <div class="repeater__content">
-            <?php if ($image ) : ?>
-                <?php echo wp_get_attachment_image($image, $size); ?>
-            <?php endif; ?>
-            <?php $link = get_sub_field('link'); ?>
-            <?php if ($link ) : ?>
-                    <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target']); ?>"><?php echo esc_html($link['title']); ?></a>
-            <?php endif; ?>
-            <?php if (!$link ) : ?>
-                    <p><?php the_sub_field('text'); ?></p>                
-            <?php endif; ?>
-            </div>            
-        <?php endwhile; ?>
-    <?php else : ?>
-        <?php // no rows found ?>
-    <?php endif; ?>
+<div id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $classes ); ?>">
+	<?php if ( have_rows( 'image-link-repeater' ) ) : ?>
+		<?php
+		while ( have_rows( 'image-link-repeater' ) ) :
+			the_row();
+			?>
+			<?php $link = get_sub_field( 'link' ); ?>
+			<?php $image = get_sub_field( 'image' ); ?>
+			<?php $size = 'full'; ?>
+			<div class="repeater__content">
+				<?php if ( $link ) : ?>
+						<a href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>">
+						<?php if ( $image ) : ?>
+							<?php echo wp_get_attachment_image( $image, $size ); ?>
+						<?php endif; ?>
+								<?php echo esc_html( $link['title'] ); ?></a>
+						<?php endif; ?>
+				<?php if ( ! $link ) : ?>
+					<?php if ( $image ) : ?>
+						<?php echo wp_get_attachment_image( $image, $size ); ?>
+						<?php endif; ?>
+						<p><?php the_sub_field( 'text' ); ?></p>                
+				<?php endif; ?>
+			</div>            
+		<?php endwhile; ?>
+	<?php else : ?>
+		<?php // no rows found ?>
+	<?php endif; ?>
 </div>
+
