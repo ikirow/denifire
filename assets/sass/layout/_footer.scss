@@ -3,22 +3,26 @@
   padding: rem(49) 0;
   background: $darkblue;
   color: white;
-  background-image: url('../img/footer_bg_mobile.jpg');
-  @include bp(tablet){
-    background-image: url('../img/footer_bg.jpg');
-  }
-  position: relative;
+  background-image: url("../img/footer_bg_mobile.jpg");
+  position: relative !important;
   background-size: cover;
   background-position: bottom;
+  @include bp(tablet) {
+    background-image: url("../img/footer_bg.jpg");
+  }
 
-  .wrapper{
+  .wrapper {
+    z-index: 2;
+    position: relative;
     * {
       z-index: 2;
     }
   }
 
-  &::after{
-    background-color:#0F0F0F; 
+  &::after {
+    content: "" !important;
+    display: block !important;
+    background-color: #0f0f0f;
     opacity: 0.75;
     z-index: 1;
     position: absolute;
@@ -28,13 +32,13 @@
     height: 100%;
   }
 
-  .site-info{
+  .site-info {
     color: $color-white;
     position: relative;
     font-size: rem(12px);
   }
 
-  a{
+  a {
     color: $color-white;
   }
 
@@ -44,7 +48,7 @@
       font-size: rem(12px);
     }
 
-    h2{
+    h2 {
       margin-bottom: 0;
       font-size: rem(12px);
     }
